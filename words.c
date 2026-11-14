@@ -16,7 +16,6 @@
 
 void write(char method);
 void tokenize();
-void atoi();
 unsigned int djb2(unsigned int position, unsigned short length);
 void display(char choice);
 
@@ -28,7 +27,6 @@ enum choices {
     INSERT              = '1'
     ,APPEND             = '2'
     ,TOKENIZE           = '3'
-    ,ATOI               = '4'
     ,DISPLAY_STATS      = '5'
     ,DISPLAY_INPUT      = '6'
     ,DISPLAY_TOKENS     = '7'
@@ -44,7 +42,6 @@ void menu(){
     printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INSERT,         T_END  );
     printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, APPEND,         T_END  );
     printf(" %s|  %c. Tokenize                                |%s\n",   T_CYAN, TOKENIZE,       T_END  );
-    printf(" %s|  %c. ATOI (ASCII to Int)                     |%s\n",   T_CYAN, ATOI,           T_END  );
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
     printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, DISPLAY_STATS,  T_END  );
     printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, DISPLAY_INPUT,  T_END  );
@@ -63,7 +60,6 @@ int main() {
         else if (choice              == INSERT)             write(choice);
         else if (choice              == APPEND)             write(choice);
         else if (choice              == TOKENIZE)           tokenize();
-        else if (choice              == ATOI)               atoi();
         else if (choice              == DISPLAY_STATS)      display(choice);
         else if (choice              == DISPLAY_INPUT)      display(choice);
         else if (choice              == DISPLAY_TOKENS)     display(choice);
@@ -99,12 +95,6 @@ void tokenize(){
         prev = chr;
     }
     token[id][2] = '\0';
-}
-
-void atoi(){ 
-    unsigned int atoi = 0;
-    for(unsigned int i = 0; input[i] != '\0'; i++)
-        if(input[i] >= '0' && input[i] <= '9') atoi = (10 * atoi) + (input[i] - '0');
 }
 
 unsigned int djb2(unsigned int position, unsigned short length){
