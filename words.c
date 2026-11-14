@@ -2,7 +2,7 @@
 #include <limits.h>
 
 #define MAX_CHARS       INT_MAX
-#define MAX_WORDS       320'000'000 
+#define MAX_WORDS       216'000'000 
 #define MAX_PAGESIZE    50 
 #define T_CYAN          "\033[44m\033[37m"
 #define T_DARK          "\033[38;5;51;48;5;234m"
