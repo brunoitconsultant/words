@@ -24,7 +24,7 @@ void display(char choice);
 static char choice;
 static unsigned char input[MAX_CHARS]   = { '\0' };
 unsigned int token[MAX_TOKENS][4]      = { { '\0' } };
-unsigned int dctionary[MAX_WORDS][2]      = { { '\0' } };
+unsigned int dictionary[MAX_WORDS][2]      = { { '\0' } };
 
 enum choices { 
     INSERT              = '1'
