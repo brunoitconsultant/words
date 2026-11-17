@@ -29,8 +29,6 @@ unsigned int lexic[MAX_WORDS][2]        = { { '\0' } };
 enum choices { 
     INSERT                  = '1'
     ,APPEND                 = '2'
-    ,TOKENIZE               = '3'
-    ,LEXICALIZE             = '4'
     ,DISPLAY_STATS          = '5'
     ,DISPLAY_INPUT          = '6'
     ,DISPLAY_TOKENS         = '7'    
@@ -46,8 +44,6 @@ void menu(){
     printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                     T_END  );
     printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INSERT,             T_END  );
     printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, APPEND,             T_END  );
-    printf(" %s|  %c. Tokenize                                |%s\n",   T_CYAN, TOKENIZE,           T_END  );
-    printf(" %s|  %c. Lexicalize                              |%s\n",   T_CYAN, LEXICALIZE,         T_END  );
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                     T_END  );
     printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, DISPLAY_STATS,      T_END  );
     printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, DISPLAY_INPUT,      T_END  );
@@ -66,8 +62,6 @@ int main() {
         if      (choice              == EXIT)               return 0;
         else if (choice              == INSERT)             write(choice);
         else if (choice              == APPEND)             write(choice);
-        else if (choice              == TOKENIZE)           tokenize();
-        else if (choice              == LEXICALIZE)         lexicalize();
         else if (choice              == DISPLAY_STATS)      display(choice);
         else if (choice              == DISPLAY_INPUT)      display(choice);
         else if (choice              == DISPLAY_TOKENS)     display(choice);
