@@ -144,7 +144,7 @@ void display(char choice){
             printf(" %s|[%10d] | ", T_DARK, token[pos][0]);
             for(unsigned short i = token[pos][1]; i < (token[pos][1] + token[pos][2]); i++){ printf("%c", input[i]); }
             for(unsigned short i = 0; i < (17 - token[pos][2]); i++){ printf(" "); } printf("|%s", T_END);
-            printf(" %s%-10u |", T_DARK, token[pos][3]);
+            printf(" %s%-10u |%s", T_DARK, token[pos][3], T_END);
             if(pos == (page * MAX_PAGESIZE) - 1){ 
                 printf(" press '+' & ENTER for more.. ");
                 unsigned char t;
