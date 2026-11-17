@@ -2,7 +2,7 @@
 #include <limits.h>
 
 #define MAX_CHARS       INT_MAX
-#define MAX_TOKENS      216'000'000 
+#define MAX_TOKENS      200'000'000 
 #define MAX_WORDS       1000 
 #define MAX_PAGESIZE    50 
 #define T_CYAN          "\033[44m\033[37m"
@@ -17,43 +17,45 @@
 
 void write(char method);
 void tokenize();
-void words();
+void lexicalize();
 unsigned int djb2(unsigned int position, unsigned short length);
 void display(char choice);
 
 static char choice;
 static unsigned char input[MAX_CHARS]   = { '\0' };
-unsigned int token[MAX_TOKENS][4]      = { { '\0' } };
-unsigned int dictionary[MAX_WORDS][2]      = { { '\0' } };
+unsigned int token[MAX_TOKENS][4]       = { { '\0' } };
+unsigned int lexic[MAX_WORDS][2]        = { { '\0' } };
 
 enum choices { 
-    INSERT              = '1'
-    ,APPEND             = '2'
-    ,TOKENIZE           = '3'
-    ,WORD_COUNT         = '4'
-    ,DISPLAY_STATS      = '5'
-    ,DISPLAY_INPUT      = '6'
-    ,DISPLAY_TOKENS     = '7'
-    ,EXIT               = '9' 
+    INSERT                  = '1'
+    ,APPEND                 = '2'
+    ,TOKENIZE               = '3'
+    ,LEXICALIZE             = '4'
+    ,DISPLAY_STATS          = '5'
+    ,DISPLAY_INPUT          = '6'
+    ,DISPLAY_TOKENS         = '7'    
+    ,DISPLAY_LEXIC          = '8'
+    ,EXIT                   = '9' 
 };
 
 void menu(){
     char t;
     extern char choice;
-    printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                 T_END  );
-    printf(" %s| Pick one of the following operations:       |%s\n",    T_CYAN,                 T_END  );
-    printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                 T_END  );
-    printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INSERT,         T_END  );
-    printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, APPEND,         T_END  );
-    printf(" %s|  %c. Tokenize                                |%s\n",   T_CYAN, TOKENIZE,       T_END  );
-    printf(" %s|  %c. Word Count                              |%s\n",   T_CYAN, WORD_COUNT,     T_END  );
-    printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
-    printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, DISPLAY_STATS,  T_END  );
-    printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, DISPLAY_INPUT,  T_END  );
-    printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, DISPLAY_TOKENS, T_END  );
-    printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
-    printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,           T_END  );
-    printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                 T_END  );
+    printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                     T_END  );
+    printf(" %s| Pick one of the following operations:       |%s\n",    T_CYAN,                     T_END  );
+    printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                     T_END  );
+    printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INSERT,             T_END  );
+    printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, APPEND,             T_END  );
+    printf(" %s|  %c. Tokenize                                |%s\n",   T_CYAN, TOKENIZE,           T_END  );
+    printf(" %s|  %c. Lexicalize                              |%s\n",   T_CYAN, LEXICALIZE,         T_END  );
+    printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                     T_END  );
+    printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, DISPLAY_STATS,      T_END  );
+    printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, DISPLAY_INPUT,      T_END  );
+    printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, DISPLAY_TOKENS,     T_END  );
+    printf(" %s|  %c. Display Lexic                           |%s\n",   T_CYAN, DISPLAY_LEXIC,      T_END  );
+    printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                     T_END  );
+    printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,               T_END  );
+    printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                     T_END  );
     while((t = getchar()) != '\n') { choice = t; printf("%s",           T_BACKSPACE); }
 }
 
@@ -65,10 +67,11 @@ int main() {
         else if (choice              == INSERT)             write(choice);
         else if (choice              == APPEND)             write(choice);
         else if (choice              == TOKENIZE)           tokenize();
-        else if (choice              == WORD_COUNT)         words();
+        else if (choice              == LEXICALIZE)         lexicalize();
         else if (choice              == DISPLAY_STATS)      display(choice);
         else if (choice              == DISPLAY_INPUT)      display(choice);
         else if (choice              == DISPLAY_TOKENS)     display(choice);
+        else if (choice              == DISPLAY_LEXIC)      display(choice);
         else                                                printf(" \"%c\" is an invalid option\n", choice);
     } 
 }
@@ -103,11 +106,14 @@ void tokenize(){
     token[id][2] = '\0';
 }
 
-void words(){
-    for(unsigned int i = 0; i < (MAX_TOKENS - 1) && token[i] != '\0'; i++){
-        printf("Token[%s]\tDictionaty[%s]", i, (token[i][3] % MAX_WORDS));
-        dictionary[(token[i][3] % MAX_WORDS)][1] = token[i];
-    } 
+void lexicalize(){
+    for(unsigned short i = 0; i < MAX_WORDS; i++){ lexic[i][0] = 0; lexic[i][1] = 0; } 
+    for(unsigned int i = 0; i < (MAX_TOKENS - 1) && token[i][2] != '\0'; i++){
+        unsigned short bucket = (token[i][3] % MAX_WORDS);
+        while(lexic[bucket][1] > 0 && lexic[bucket][0] != token[i][3]){ bucket++; }
+        lexic[bucket][0] = token[i][3];
+        lexic[bucket][1]++;
+    }
 }
 
 unsigned int djb2(unsigned int position, unsigned short length){
@@ -158,6 +164,17 @@ void display(char choice){
             }else printf("\n");
         }
         printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
+    }else if(choice == DISPLAY_LEXIC){
+        tokenize();
+        lexicalize();
+        printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
+        printf(" %s| lexic[n]    | token[hash]      | count      |%s\n", T_DARK, T_END);
+        printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
+        for(pos = 0; pos < MAX_WORDS; pos++)
+            if(lexic[pos][1] > 0)
+                printf(" %s|[%10d] | %-16u | %-10u |%s\n", T_DARK, pos, lexic[pos][0], lexic[pos][1], T_END); 
+        printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
+
     }else if(choice == DISPLAY_STATS){
         unsigned int rows = 0, words = 0, chars;
         unsigned char chr, prev = '\0';
