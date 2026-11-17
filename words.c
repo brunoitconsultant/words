@@ -103,7 +103,12 @@ void tokenize(){
     token[id][2] = '\0';
 }
 
-void words(){ printf("counting words...\n"); }
+void words(){
+    for(unsigned int i = 0; i < (MAX_TOKENS - 1) && token[i] != '\0'; i++){
+        printf("Token[%s]\tDictionaty[%s]", i, (token[i][3] % MAX_WORDS));
+        dictionary[(token[i][3] % MAX_WORDS)][1] = token[i];
+    } 
+}
 
 unsigned int djb2(unsigned int position, unsigned short length){
     unsigned int hash = 5381;
