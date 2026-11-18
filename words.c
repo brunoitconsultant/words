@@ -86,14 +86,17 @@ void tokenize(){
     unsigned char chr, prev = '\0';
     unsigned int id = 0;
     for(unsigned int i = 0; ((chr = input[i]) != '\0'); i++){
-        if(((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z')) && (prev < 'A' || ((prev > 'Z' && prev < 'a') && prev > 'z'))){
+        if(
+            ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')) 
+            && ((prev < '0' || (prev > '9' && prev < 'A') || ((prev > 'Z' && prev < 'a') && prev > 'z')))
+        ){
             if(id < (MAX_TOKENS - 1)){
                 token[id][0] = id;
                 token[id][1] = i;
                 token[id][2] = 1;
                 id++;
             }else break;
-        }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z')) token[id-1][2]++;
+        }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')) token[id-1][2]++;
         else token[id-1][3] = djb2(token[id-1][1], token[id-1][2]);
         prev = chr;
     }
@@ -177,7 +180,10 @@ void display(char choice){
         printf(" %s+---------------------------------------------+%s\n", T_DARK, T_END);
         for(chars = 0; (chr = input[chars]) != '\0'; chars++){
             if(chr == '\n') rows++;
-            if(((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z')) && (prev < 'A' || ((prev > 'Z' && prev < 'a') && prev > 'z'))) ++words;
+            if(
+                ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')) 
+                && (prev < '0' || (prev > '9' && prev < 'A') || ((prev > 'Z' && prev < 'a') && prev > 'z'))
+            ) ++words;
             prev = chr;
         }
         printf(" %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
