@@ -3,7 +3,7 @@
 
 #define MAX_CHARS       INT_MAX
 #define MAX_TOKENS      200'000'000 
-#define MAX_WORDS       1000 
+#define MAX_WORDS       1'000'000 
 #define MAX_PAGESIZE    50 
 #define T_CYAN          "\033[44m\033[37m"
 #define T_DARK          "\033[38;5;51;48;5;234m"
@@ -101,12 +101,12 @@ void tokenize(){
 }
 
 void lexicalize(){
-    for(unsigned short i = 0; i < MAX_WORDS; i++){ lexic[i][0] = 0; lexic[i][1] = 0; } 
+    for(unsigned int i = 0; i < MAX_WORDS; i++){ lexic[i][0] = 0; lexic[i][1] = 0; } 
     for(unsigned int i = 0; i < (MAX_TOKENS - 1) && token[i][2] != '\0'; i++){
-        unsigned short bucket = (token[i][3] % MAX_WORDS);
-        while(lexic[bucket][1] > 0 && lexic[bucket][0] != token[i][3]){ bucket++; }
-        lexic[bucket][0] = token[i][3];
-        lexic[bucket][1]++;
+        unsigned int id = (token[i][3] % MAX_WORDS);
+        while(lexic[id][1] > 0 && lexic[id][0] != token[i][3]){ id++; }
+        lexic[id][0] = token[i][3];
+        lexic[id][1]++;
     }
 }
 
