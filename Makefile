@@ -1,12 +1,17 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Wuninitialized -O0 -g -fsanitize=address,undefined -mcmodel=medium
+CFLAGS = -Iinclude -Wall -Wextra -Wuninitialized -O0 -g -fsanitize=address,undefined -mcmodel=medium
 
-TARGETS = words
+TARGETS = words tfidf
+SRCS = src/main.c         src/menu.c      src/input.c      src/display.c
+HDRS = include/styling.h  include/menu.h  include/input.h  include/display.h
 
 all: $(TARGETS)
 
 words: words.c
 	$(CC) $(CFLAGS) words.c -o words
+
+tfidf: $(SRCS) $(HDRS)
+	$(CC) $(CFLAGS) $(SRCS) -o tfidf
 
 clean:
 	@rm -f $(TARGETS)
