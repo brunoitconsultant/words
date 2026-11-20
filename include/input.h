@@ -1,4 +1,3 @@
-
 #include <limits.h>
 
 #define MAX_CHARS INT_MAX
