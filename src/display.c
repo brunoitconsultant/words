@@ -56,5 +56,24 @@ int display(char choice){
         printf(" %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
         printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
         return 0;
+    }else if(choice == DISPLAY_TOKENS){
+        tokenize();
+        printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
+        printf(" %s| token[n]    | value            | hash[djb2] |%s\n", T_DARK, T_END);
+        printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
+        for(pos = 0; pos < (page * MAX_PAGESIZE) && token[pos][2] != '\0'; pos++){
+            printf(" %s|[%10d] | ", T_DARK, token[pos][0]);
+            for(unsigned short i = token[pos][1]; i < (token[pos][1] + token[pos][2]); i++){ printf("%c", input[i]); }
+            for(unsigned short i = 0; i < (17 - token[pos][2]); i++){ printf(" "); } printf("|%s", T_END);
+            printf(" %s%-10u |%s", T_DARK, token[pos][3], T_END);
+            if(pos == (page * MAX_PAGESIZE) - 1){
+                printf(" press '+' & ENTER for more.. ");
+                unsigned char t;
+                while((t = getchar()) != '\n')
+                    if(t == '+'){ page++; printf("\r%s%s%s%s\r", T_UP, T_HORIZ_ABS, T_ERASE_LINE, T_DOWN);} else break;
+            }else printf("\n");
+        }
+        printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
+        return 0;
     } else return 999;
 }

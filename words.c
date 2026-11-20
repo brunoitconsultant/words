@@ -2,7 +2,7 @@
 #include <limits.h>*/
 
 //#define MAX_CHARS       INT_MAX
-#define MAX_TOKENS      200'000'000 
+//#define MAX_TOKENS      200'000'000 
 #define MAX_WORDS       1'000'000 
 /*#define MAX_PAGESIZE    50 
 #define T_CYAN          "\033[44m\033[37m"
@@ -16,14 +16,14 @@
 #define T_DOWN          "\033[1B"*/
 
 //void write(char method);
-void tokenize();
+//void tokenize();
 void lexicalize();
 unsigned int djb2(unsigned int position, unsigned short length);
 //void display(char choice);
 
 //static char choice;
 //static unsigned char input[MAX_CHARS]   = { '\0' };
-unsigned int token[MAX_TOKENS][4]       = { { '\0' } };
+//unsigned int token[MAX_TOKENS][4]       = { { '\0' } };
 unsigned int lexic[MAX_WORDS][2]        = { { '\0' } };
 
 /*enum choices { 
@@ -82,7 +82,7 @@ unsigned int lexic[MAX_WORDS][2]        = { { '\0' } };
     clearerr(stdin);
 }*/
 
-void tokenize(){
+/*void tokenize(){
     unsigned char chr, prev = '\0';
     unsigned int id = 0;
     for(unsigned int i = 0; ((chr = input[i]) != '\0'); i++){
@@ -101,7 +101,7 @@ void tokenize(){
         prev = chr;
     }
     token[id][2] = '\0';
-}
+}*/
 
 void lexicalize(){
     for(unsigned int i = 0; i < MAX_WORDS; i++){ lexic[i][0] = 0; lexic[i][1] = 0; } 
