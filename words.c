@@ -18,7 +18,7 @@
 //void write(char method);
 //void tokenize();
 void lexicalize();
-unsigned int djb2(unsigned int position, unsigned short length);
+//unsigned int djb2(unsigned int position, unsigned short length);
 //void display(char choice);
 
 //static char choice;
@@ -113,11 +113,11 @@ void lexicalize(){
     }
 }
 
-unsigned int djb2(unsigned int position, unsigned short length){
+/*unsigned int djb2(unsigned int position, unsigned short length){
     unsigned int hash = 5381;
     for(unsigned int i = position; i < (position + length); i++) hash = ((hash << 5) + hash) + input[i];
     return hash;
-}
+}*/
 
 //void display(char choice){
 /*    unsigned int pos, page = 1;
@@ -143,7 +143,7 @@ unsigned int djb2(unsigned int position, unsigned short length){
             }else printf("\n");
         }
         printf(" %s+-------------+----------------+------+-------+%s\n\n", T_DARK, T_END);
-    }else */if(choice == DISPLAY_TOKENS){
+    }else if(choice == DISPLAY_TOKENS){
         tokenize();
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
         printf(" %s| token[n]    | value            | hash[djb2] |%s\n", T_DARK, T_END);
@@ -161,7 +161,7 @@ unsigned int djb2(unsigned int position, unsigned short length){
             }else printf("\n");
         }
         printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
-    }else if(choice == DISPLAY_LEXIC){
+    }else*/ if(choice == DISPLAY_LEXIC){
         tokenize();
         lexicalize();
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);

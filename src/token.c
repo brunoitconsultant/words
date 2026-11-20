@@ -1,5 +1,6 @@
 #include "token.h"
 #include "input.h"
+#include "djb2.h"
 
 unsigned int token[MAX_TOKENS][4] = { { '\0' } };
 
@@ -18,7 +19,7 @@ int tokenize(){
                 id++;
             }else break;
         }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')) token[id-1][2]++;
-        //else token[id-1][3] = djb2(token[id-1][1], token[id-1][2]);
+        else token[id-1][3] = djb2(token[id-1][1], token[id-1][2]);
         prev = chr;
     }
     token[id][2] = '\0';
