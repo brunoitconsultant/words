@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Iinclude -Wall -Wextra -Wuninitialized -O0 -g -fsanitize=address,undefined -mcmodel=medium
+CFLAGS = -std=c11 -Iinclude -Wall -Wextra -Wuninitialized -O0 -g -fsanitize=address,undefined -mcmodel=medium
 
 TARGETS = tfidf
 
