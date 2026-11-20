@@ -3,7 +3,7 @@
 git clone https://github.com/brunoitconsultant/words.git ~/words ; cd ~/words
 
 ### > COMPILE CODE
-clear ; make clean ; make -s ; ./words
+clear ; make clean ; make tfidf -s ; ./tfidf
 
 ### > DEBUG CODE (using GDB)
 #### 0. Demos
