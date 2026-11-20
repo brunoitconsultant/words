@@ -8,4 +8,4 @@ enum choices {
     ,EXIT                   = '9'
 };
 
-char menu();
+char menu(void);

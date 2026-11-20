@@ -2,7 +2,7 @@
 #include "menu.h"
 #include "styling.h" 
 
-char menu(){
+char menu(void){
     char t, choice;
     printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                     T_END  );
     printf(" %s| Pick one of the following operations:       |%s\n",    T_CYAN,                     T_END  );

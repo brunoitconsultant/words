@@ -3,7 +3,7 @@
 #include "input.h"
 #include "display.h"
 
-int main() {
+int main(void) {
     char choice;
 
     while(1){

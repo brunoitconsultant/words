@@ -4,7 +4,7 @@
 
 unsigned int token[MAX_TOKENS][4] = { { '\0' } };
 
-int tokenize(){
+int tokenize(void){
     unsigned char chr, prev = '\0';
     unsigned int id = 0;
     for(unsigned int i = 0; ((chr = input[i]) != '\0'); i++){
