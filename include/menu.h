@@ -1,5 +1,6 @@
 enum choices {
-    INSERT                  = '1'
+    MENU                    = '0'
+    ,INSERT                 = '1'
     ,APPEND                 = '2'
     ,DISPLAY_STATS          = '5'
     ,DISPLAY_INPUT          = '6'

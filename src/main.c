@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "display.h"
 #include "input.h"
 #include "menu.h"
@@ -15,7 +14,7 @@ int main(void) {
             || choice == DISPLAY_INPUT
             || choice == DISPLAY_TOKENS
             || choice == DISPLAY_LEXIC)                 display(choice);
-        else                                            printf(" \"%c\" is an invalid option\n", choice);
+        else                                            return 999;
     }
 }
 

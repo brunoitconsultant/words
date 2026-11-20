@@ -11,8 +11,22 @@
 int display(char choice){
     unsigned int pos, page = 1;
 
-    if(input[0] == '\0') return 1;
-    else if(choice == DISPLAY_INPUT){
+    if(choice == MENU){
+        printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                     T_END  );
+        printf(" %s| Pick one of the following operations:       |%s\n",    T_CYAN,                     T_END  );
+        printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                     T_END  );
+        printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INSERT,             T_END  );
+        printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, APPEND,             T_END  );
+        printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                     T_END  );
+        printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, DISPLAY_STATS,      T_END  );
+        printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, DISPLAY_INPUT,      T_END  );
+        printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, DISPLAY_TOKENS,     T_END  );
+        printf(" %s|  %c. Display Lexic                           |%s\n",   T_CYAN, DISPLAY_LEXIC,      T_END  );
+        printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                     T_END  );
+        printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,               T_END  );
+        printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                     T_END  );
+        return 0;
+    }else if(choice == DISPLAY_INPUT && input[0] != '\0'){
         printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
         printf(" %s| array[n]    | address        | char | value |%s\n", T_DARK, T_END);
         printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
@@ -34,7 +48,7 @@ int display(char choice){
         }
         printf(" %s+-------------+----------------+------+-------+%s\n\n", T_DARK, T_END);
         return 0;
-    }else if(choice == DISPLAY_STATS){
+    }else if(choice == DISPLAY_STATS && input[0] != '\0'){
         unsigned int rows = 0, words = 0, chars;
         unsigned char chr, prev = '\0';
         printf(" %s+---------------------------------------------+%s\n", T_DARK, T_END);
@@ -51,7 +65,7 @@ int display(char choice){
         printf(" %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
         printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
         return 0;
-    }else if(choice == DISPLAY_TOKENS){
+    }else if(choice == DISPLAY_TOKENS && input[0] != '\0'){
         tokenize();
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
         printf(" %s| token[n]    | value            | hash[djb2] |%s\n", T_DARK, T_END);
@@ -70,7 +84,7 @@ int display(char choice){
         }
         printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
         return 0;
-    }else if(choice == DISPLAY_LEXIC){
+    }else if(choice == DISPLAY_LEXIC && input[0] != '\0'){
         tokenize();
         lexicalize();
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
