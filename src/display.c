@@ -17,6 +17,8 @@ int display(char choice){
         printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                     T_END  );
         printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INPUT_INSERT,       T_END  );
         printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, INPUT_APPEND,       T_END  );
+        printf(" %s|  %c. Tokenize                                |%s\n",   T_CYAN, TOKENIZE,           T_END  );
+        printf(" %s|  %c. Lexicalize                              |%s\n",   T_CYAN, LEXICALIZE,         T_END  );
         printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                     T_END  );
         printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, DISPLAY_STATS,      T_END  );
         printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, DISPLAY_INPUT,      T_END  );
@@ -66,7 +68,6 @@ int display(char choice){
         printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
         return 0;
     }else if(choice == DISPLAY_TOKENS && input[0] != '\0'){
-        tokenize();
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
         printf(" %s| token[n]    | value            | hash[djb2] |%s\n", T_DARK, T_END);
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
@@ -85,8 +86,6 @@ int display(char choice){
         printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
         return 0;
     }else if(choice == DISPLAY_LEXIC && input[0] != '\0'){
-        tokenize();
-        lexicalize();
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
         printf(" %s| lexic[n]    | token[hash]      | count      |%s\n", T_DARK, T_END);
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
