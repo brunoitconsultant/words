@@ -4,17 +4,9 @@
 #include "input.h"
 #include "token.h"
 #include "lexic.h"
+#include "styling.h"
 
 #define MAX_PAGESIZE    50
-#define T_CYAN          "\033[44m\033[37m"
-#define T_DARK          "\033[38;5;51;48;5;234m"
-#define T_END           "\033[0m"
-#define T_CHAR_CR       "\xE2\x86\xB5"
-#define T_BACKSPACE     "\033[1A\r\033[K"
-#define T_UP            "\033[1A"
-#define T_HORIZ_ABS     "\033[49G"
-#define T_ERASE_LINE    "\033[K"
-#define T_DOWN          "\033[1B"
 
 int display(char choice){
     unsigned int pos, page = 1;
