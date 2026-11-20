@@ -1,1 +1,3 @@
-void display(char choice);
+#include "input.h"
+
+int display(char choice);
