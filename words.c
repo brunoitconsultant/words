@@ -1,10 +1,10 @@
-/*#include <stdio.h>
-#include <limits.h>*/
+#include <stdio.h>
+#include <limits.h>
 
-//#define MAX_CHARS       INT_MAX
-//#define MAX_TOKENS      200'000'000 
+#define MAX_CHARS       INT_MAX
+#define MAX_TOKENS      200'000'000 
 #define MAX_WORDS       1'000'000 
-/*#define MAX_PAGESIZE    50 
+#define MAX_PAGESIZE    50 
 #define T_CYAN          "\033[44m\033[37m"
 #define T_DARK          "\033[38;5;51;48;5;234m"
 #define T_END           "\033[0m"
@@ -13,20 +13,20 @@
 #define T_UP            "\033[1A"
 #define T_HORIZ_ABS     "\033[49G"
 #define T_ERASE_LINE    "\033[K"
-#define T_DOWN          "\033[1B"*/
+#define T_DOWN          "\033[1B"
 
-//void write(char method);
-//void tokenize();
+void write(char method);
+void tokenize();
 void lexicalize();
-//unsigned int djb2(unsigned int position, unsigned short length);
-//void display(char choice);
+unsigned int djb2(unsigned int position, unsigned short length);
+void display(char choice);
 
-//static char choice;
-//static unsigned char input[MAX_CHARS]   = { '\0' };
-//unsigned int token[MAX_TOKENS][4]       = { { '\0' } };
+static char choice;
+static unsigned char input[MAX_CHARS]   = { '\0' };
+unsigned int token[MAX_TOKENS][4]       = { { '\0' } };
 unsigned int lexic[MAX_WORDS][2]        = { { '\0' } };
 
-/*enum choices { 
+enum choices { 
     INSERT                  = '1'
     ,APPEND                 = '2'
     ,DISPLAY_STATS          = '5'
@@ -34,9 +34,9 @@ unsigned int lexic[MAX_WORDS][2]        = { { '\0' } };
     ,DISPLAY_TOKENS         = '7'    
     ,DISPLAY_LEXIC          = '8'
     ,EXIT                   = '9' 
-};*/
+};
 
-/*void menu(){
+void menu(){
     char t;
     extern char choice;
     printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                     T_END  );
@@ -53,9 +53,9 @@ unsigned int lexic[MAX_WORDS][2]        = { { '\0' } };
     printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,               T_END  );
     printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                     T_END  );
     while((t = getchar()) != '\n') { choice = t; printf("%s",           T_BACKSPACE); }
-}*/
+}
 
-/*int main() {
+int main() {
     extern char choice;
     while(1){
         menu();
@@ -68,9 +68,9 @@ unsigned int lexic[MAX_WORDS][2]        = { { '\0' } };
         else if (choice              == DISPLAY_LEXIC)      display(choice);
         else                                                printf(" \"%c\" is an invalid option\n", choice);
     } 
-}*/
+}
 
-/*void write(char method){
+void write(char method){
     char c;
     unsigned int i = 0;
     if      (method == INSERT)  ;
@@ -80,9 +80,9 @@ unsigned int lexic[MAX_WORDS][2]        = { { '\0' } };
     while((c = getchar()) != EOF) if((i + 1) < MAX_CHARS) input[i++] = c;
     input[i] = '\0';
     clearerr(stdin);
-}*/
+}
 
-/*void tokenize(){
+void tokenize(){
     unsigned char chr, prev = '\0';
     unsigned int id = 0;
     for(unsigned int i = 0; ((chr = input[i]) != '\0'); i++){
@@ -101,7 +101,7 @@ unsigned int lexic[MAX_WORDS][2]        = { { '\0' } };
         prev = chr;
     }
     token[id][2] = '\0';
-}*/
+}
 
 void lexicalize(){
     for(unsigned int i = 0; i < MAX_WORDS; i++){ lexic[i][0] = 0; lexic[i][1] = 0; } 
@@ -113,14 +113,14 @@ void lexicalize(){
     }
 }
 
-/*unsigned int djb2(unsigned int position, unsigned short length){
+unsigned int djb2(unsigned int position, unsigned short length){
     unsigned int hash = 5381;
     for(unsigned int i = position; i < (position + length); i++) hash = ((hash << 5) + hash) + input[i];
     return hash;
-}*/
+}
 
-//void display(char choice){
-/*    unsigned int pos, page = 1;
+void display(char choice){
+    unsigned int pos, page = 1;
     if(input[0] == '\0') printf(" %s\n", "no data is available");
     else if(choice == DISPLAY_INPUT){
         printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
@@ -161,7 +161,7 @@ void lexicalize(){
             }else printf("\n");
         }
         printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
-    }else*/ if(choice == DISPLAY_LEXIC){
+    }else if(choice == DISPLAY_LEXIC){
         tokenize();
         lexicalize();
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
@@ -189,4 +189,4 @@ void lexicalize(){
         printf(" %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
         printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
     }
-//}
+}

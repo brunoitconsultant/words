@@ -1,6 +1,9 @@
 #include <stdio.h>
-#include "menu.h"
 #include "display.h"
+#include "menu.h"
+#include "input.h"
+#include "token.h"
+#include "lexic.h"
 
 #define MAX_PAGESIZE    50
 #define T_CYAN          "\033[44m\033[37m"
@@ -75,5 +78,17 @@ int display(char choice){
         }
         printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
         return 0;
-    } else return 999;
+    }else if(choice == DISPLAY_LEXIC){
+        tokenize();
+        lexicalize();
+        printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
+        printf(" %s| lexic[n]    | token[hash]      | count      |%s\n", T_DARK, T_END);
+        printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
+        for(pos = 0; pos < MAX_WORDS; pos++)
+            if(lexic[pos][1] > 0)
+                printf(" %s|[%10d] | %-16u | %-10u |%s\n", T_DARK, pos, lexic[pos][0], lexic[pos][1], T_END);
+        printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
+        return 0;
+
+    }else return 999;
 }
