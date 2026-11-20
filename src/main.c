@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "menu.h"
-#include "input.h"
 #include "display.h"
+#include "input.h"
+#include "menu.h"
 
 int main(void) {
     char choice;

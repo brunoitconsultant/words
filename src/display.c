@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include "display.h"
-#include "menu.h"
 #include "input.h"
-#include "token.h"
 #include "lexic.h"
+#include "menu.h"
 #include "styling.h"
+#include "token.h"
 
 #define MAX_PAGESIZE    50
 

@@ -1,6 +1,6 @@
-#include "token.h"
-#include "input.h"
 #include "djb2.h"
+#include "input.h"
+#include "token.h"
 
 unsigned int token[MAX_TOKENS][4] = { { '\0' } };
 
