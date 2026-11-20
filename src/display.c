@@ -11,19 +11,19 @@
 int display(char choice){
     unsigned int pos, page = 1;
 
-    if(choice == MENU){
+    if(choice == MENU_SHOW){
         printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                     T_END  );
         printf(" %s| Pick one of the following operations:       |%s\n",    T_CYAN,                     T_END  );
         printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                     T_END  );
-        printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INSERT,             T_END  );
-        printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, APPEND,             T_END  );
+        printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INPUT_INSERT,       T_END  );
+        printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, INPUT_APPEND,       T_END  );
         printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                     T_END  );
         printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, DISPLAY_STATS,      T_END  );
         printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, DISPLAY_INPUT,      T_END  );
         printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, DISPLAY_TOKENS,     T_END  );
         printf(" %s|  %c. Display Lexic                           |%s\n",   T_CYAN, DISPLAY_LEXIC,      T_END  );
         printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                     T_END  );
-        printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,               T_END  );
+        printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, MENU_EXIT,          T_END  );
         printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                     T_END  );
         return 0;
     }else if(choice == DISPLAY_INPUT && input[0] != '\0'){
