@@ -1,10 +1,9 @@
 #include "djb2.h"
-#include "input.h"
 #include "token.h"
 
 unsigned int token[MAX_TOKENS][4] = { { '\0' } };
 
-int tokenize(void){
+int tokenize(unsigned char input[MAX_CHARS]){
     unsigned char chr, prev = '\0';
     unsigned int id = 0;
     for(unsigned int i = 0; ((chr = input[i]) != '\0'); i++){
@@ -19,7 +18,7 @@ int tokenize(void){
                 id++;
             }else break;
         }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')) token[id-1][2]++;
-        else token[id-1][3] = djb2(token[id-1][1], token[id-1][2]);
+        else token[id-1][3] = djb2(input, token[id-1][1], token[id-1][2]);
         prev = chr;
     }
     token[id][2] = '\0';

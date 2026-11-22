@@ -1,7 +1,4 @@
-#define MAX_TOKENS 200000000
+#include "config.h"
 
-enum token_action {
-    TOKENIZE = '3'
-};
 extern unsigned int token[MAX_TOKENS][4];
-int tokenize(void);
+int tokenize(unsigned char input[MAX_CHARS]);

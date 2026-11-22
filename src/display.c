@@ -1,9 +1,8 @@
 #include <stdio.h>
+#include "config.h"
 #include "display.h"
 #include "input.h"
 #include "lexic.h"
-#include "menu.h"
-#include "styling.h"
 #include "token.h"
 
 #define MAX_PAGESIZE    50
@@ -11,24 +10,24 @@
 int display(char choice){
     unsigned int pos, page = 1;
 
-    if(choice == MENU_SHOW){
-        printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                     T_END  );
-        printf(" %s| Pick one of the following operations:       |%s\n",    T_CYAN,                     T_END  );
-        printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                     T_END  );
-        printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INPUT_INSERT,       T_END  );
-        printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, INPUT_APPEND,       T_END  );
-        printf(" %s|  %c. Tokenize                                |%s\n",   T_CYAN, TOKENIZE,           T_END  );
-        printf(" %s|  %c. Lexicalize                              |%s\n",   T_CYAN, LEXICALIZE,         T_END  );
-        printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                     T_END  );
-        printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, DISPLAY_STATS,      T_END  );
-        printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, DISPLAY_INPUT,      T_END  );
-        printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, DISPLAY_TOKENS,     T_END  );
-        printf(" %s|  %c. Display Lexic                           |%s\n",   T_CYAN, DISPLAY_LEXIC,      T_END  );
-        printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                     T_END  );
-        printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, MENU_EXIT,          T_END  );
-        printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                     T_END  );
+    if(choice == SHOW){
+        printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                 T_END  );
+        printf(" %s| Pick one of the following operations:       |%s\n",    T_CYAN,                 T_END  );
+        printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                 T_END  );
+        printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INSERT,         T_END  );
+        printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, APPEND,         T_END  );
+        printf(" %s|  %c. Tokenize                                |%s\n",   T_CYAN, TOKENIZE,       T_END  );
+        printf(" %s|  %c. Lexicalize                              |%s\n",   T_CYAN, LEXICALIZE,     T_END  );
+        printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
+        printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, STATS,          T_END  );
+        printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, INPUT,          T_END  );
+        printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, TOKENS,         T_END  );
+        printf(" %s|  %c. Display Lexic                           |%s\n",   T_CYAN, LEXIC,          T_END  );
+        printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
+        printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,           T_END  );
+        printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                 T_END  );
         return 0;
-    }else if(choice == DISPLAY_INPUT && input[0] != '\0'){
+    }else if(choice == INPUT && input[0] != '\0'){
         printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
         printf(" %s| array[n]    | address        | char | value |%s\n", T_DARK, T_END);
         printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
@@ -50,7 +49,7 @@ int display(char choice){
         }
         printf(" %s+-------------+----------------+------+-------+%s\n\n", T_DARK, T_END);
         return 0;
-    }else if(choice == DISPLAY_STATS && input[0] != '\0'){
+    }else if(choice == STATS && input[0] != '\0'){
         unsigned int rows = 0, words = 0, chars;
         unsigned char chr, prev = '\0';
         printf(" %s+---------------------------------------------+%s\n", T_DARK, T_END);
@@ -67,7 +66,7 @@ int display(char choice){
         printf(" %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
         printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
         return 0;
-    }else if(choice == DISPLAY_TOKENS && input[0] != '\0'){
+    }else if(choice == TOKENS && input[0] != '\0'){
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
         printf(" %s| token[n]    | value            | hash[djb2] |%s\n", T_DARK, T_END);
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
@@ -75,7 +74,7 @@ int display(char choice){
             printf(" %s|[%10d] | ", T_DARK, token[pos][0]);
             for(unsigned short i = token[pos][1]; i < (token[pos][1] + token[pos][2]); i++){ printf("%c", input[i]); }
             for(unsigned short i = 0; i < (17 - token[pos][2]); i++){ printf(" "); } printf("|%s", T_END);
-            printf(" %s%-10u |%s", T_DARK, token[pos][3], T_END);
+            printf("%s %-10u |%s", T_DARK, token[pos][3], T_END);
             if(pos == (page * MAX_PAGESIZE) - 1){
                 printf(" press '+' & ENTER for more.. ");
                 unsigned char t;
@@ -85,7 +84,7 @@ int display(char choice){
         }
         printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
         return 0;
-    }else if(choice == DISPLAY_LEXIC && input[0] != '\0'){
+    }else if(choice == LEXIC && input[0] != '\0'){
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
         printf(" %s| lexic[n]    | token[hash]      | count      |%s\n", T_DARK, T_END);
         printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);

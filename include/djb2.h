@@ -1,1 +1,1 @@
-unsigned int djb2(unsigned int position, unsigned short length);
+unsigned int djb2(unsigned char input[], unsigned int position, unsigned short length);

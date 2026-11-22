@@ -1,10 +1,9 @@
 #include "lexic.h"
-#include "token.h"
 
 unsigned int lexic[MAX_WORDS][2] = { { '\0' } };
 static void clear(void);
 
-int lexicalize(void){
+int lexicalize(unsigned int token[][4]){
     clear();
     for(unsigned int i = 0; i < (MAX_TOKENS - 1) && token[i][2] != '\0'; i++){
         unsigned int id = (token[i][3] % MAX_WORDS);
