@@ -20,8 +20,6 @@ enum menu {
     SHOW                = '0'
     ,INSERT             = '1'
     ,APPEND             = '2'
-    ,TOKENIZE           = '3'
-    ,LEXICALIZE         = '4'
     ,STATS              = '5'
     ,INPUT              = '6'
     ,TOKENS             = '7'

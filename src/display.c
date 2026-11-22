@@ -16,8 +16,6 @@ int display(char choice){
         printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                 T_END  );
         printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INSERT,         T_END  );
         printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, APPEND,         T_END  );
-        printf(" %s|  %c. Tokenize                                |%s\n",   T_CYAN, TOKENIZE,       T_END  );
-        printf(" %s|  %c. Lexicalize                              |%s\n",   T_CYAN, LEXICALIZE,     T_END  );
         printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
         printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, STATS,          T_END  );
         printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, INPUT,          T_END  );

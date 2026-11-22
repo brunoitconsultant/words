@@ -11,16 +11,18 @@ int main(void) {
 
     while(1){
         choice = menu();
-        if      (choice == EXIT)                            return 0;
-        else if (choice == INSERT || choice == APPEND)      write(choice);
-        else if (choice == TOKENIZE)                        tokenize(input);
-        else if (choice == LEXICALIZE)                      lexicalize(token);
-        else if (
+        if      (choice == EXIT)                        return 0;
+        else if (choice == INSERT || choice == APPEND)  { 
+            write(choice); 
+            tokenize(input); 
+            lexicalize(token); 
+            display(STATS); 
+        }else if (
             choice      == STATS
             || choice   == INPUT
             || choice   == TOKENS
-            || choice   == LEXIC)                           display(choice);
-        else                                                return 999;
+            || choice   == LEXIC)                       display(choice);
+        else                                            return 999;
     }
 }
 
