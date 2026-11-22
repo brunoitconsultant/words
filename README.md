@@ -1,6 +1,5 @@
 ##  DEPENDENCIES
-<img width="769" height="219" alt="image" src="https://github.com/user-attachments/assets/1ae4ac92-7bcb-4239-8f40-c7cbb49d2f9b" />
-
+<img width="766" height="220" alt="image" src="https://github.com/user-attachments/assets/1c926d6d-a288-47b6-8af5-aaf141963b27" />
 
 ##  RUN IN BASH
 ### > GET SOURCES
