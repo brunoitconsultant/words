@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "config.h"
 #include "display.h"
 #include "input.h"
 #include "lexic.h"
@@ -29,6 +30,6 @@ int main(void) {
 char menu(void){
     char t, choice;
     display(SHOW);
-    while((t = getchar()) != '\n') { choice = t; printf("\033[1A\r\033[K"); }
+    while((t = getchar()) != '\n') { choice = t; printf(T_ERASE_LINE_ABOVE); }
     return choice;
 }
