@@ -17,19 +17,18 @@ int main(void) {
             write(choice); 
             tokenize(input); 
             lexicalize(token); 
-            display(STATS); 
-       }else if (
-            choice      == STATS
-            || choice   == INPUT
-            || choice   == TOKENS
-            || choice   == LEXIC)                       display(choice);
+            display_stats(input);}
+        else if(choice  == STATS)                       display_stats(input);
+        else if(choice  == INPUT)                       display_input(input);
+        else if(choice  == TOKENS)                      display_tokens(token, input);
+        else if(choice  == LEXIC)                       display_lexic(lexic);
         else                                            return 999;
     }
 }
 
 char menu(void){
     char t, choice;
-    display(SHOW);
+    display_menu();
     while((t = getchar()) != '\n') { choice = t; printf(T_ERASE_LINE_ABOVE); }
     return choice;
 }

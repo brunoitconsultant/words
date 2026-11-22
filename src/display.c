@@ -1,94 +1,92 @@
 #include <stdio.h>
 #include "config.h"
 #include "display.h"
-#include "input.h"
-#include "lexic.h"
-#include "token.h"
 
-int display(char choice){
-    unsigned int pos, page = 1;
+unsigned int pos, page = 1;
 
-    if(choice == SHOW){
-        printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                 T_END  );
-        printf(" %s| Pick one of the following operations:       |%s\n",    T_CYAN,                 T_END  );
-        printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                 T_END  );
-        printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INSERT,         T_END  );
-        printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, APPEND,         T_END  );
-        printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
-        printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, STATS,          T_END  );
-        printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, INPUT,          T_END  );
-        printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, TOKENS,         T_END  );
-        printf(" %s|  %c. Display Lexic                           |%s\n",   T_CYAN, LEXIC,          T_END  );
-        printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
-        printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,           T_END  );
-        printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                 T_END  );
-        return 0;
-    }else if(choice == INPUT && input[0] != '\0'){
-        printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
-        printf(" %s| array[n]    | address        | char | value |%s\n", T_DARK, T_END);
-        printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
-        for(pos = 0; pos < (page * MAX_PAGESIZE) && input[pos] != '\0'; pos++){
-            printf(" %s|[%10d] | %-10p | %-4d | %-6s|%s"
-                , T_DARK
-                , pos
-                , (void*)&input[pos]
-                , input[pos]
-                , (input[pos] == '\n' ? T_CHAR_CR "     " : (char[]){ input[pos], '\0' })
-                , T_END
-            );
-            if(pos == (page * MAX_PAGESIZE) - 1){
-                printf(" press '+' & ENTER for more.. ");
-                unsigned char t;
-                while((t = getchar()) != '\n')
-                    if(t == '+'){ page++; printf("\r%s%s%s%s\r", T_UP, T_HORIZ_ABS, T_ERASE_LINE, T_DOWN);} else break;
-            }else printf("\n");
-        }
-        printf(" %s+-------------+----------------+------+-------+%s\n\n", T_DARK, T_END);
-        return 0;
-    }else if(choice == STATS && input[0] != '\0'){
-        unsigned int rows = 0, words = 0, chars;
-        unsigned char chr, prev = '\0';
-        printf(" %s+---------------------------------------------+%s\n", T_DARK, T_END);
-        printf(" %s| Stats                                       |%s\n", T_DARK, T_END);
-        printf(" %s+---------------------------------------------+%s\n", T_DARK, T_END);
-        for(chars = 0; (chr = input[chars]) != '\0'; chars++){
-            if(chr == '\n') rows++;
-            if(
-                ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9'))
-                && (prev < '0' || (prev > '9' && prev < 'A') || ((prev > 'Z' && prev < 'a') && prev > 'z'))
-            ) ++words;
-            prev = chr;
-        }
-        printf(" %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
-        printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
-        return 0;
-    }else if(choice == TOKENS && input[0] != '\0'){
-        printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
-        printf(" %s| token[n]    | value            | hash[djb2] |%s\n", T_DARK, T_END);
-        printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
-        for(pos = 0; pos < (page * MAX_PAGESIZE) && token[pos][2] != '\0'; pos++){
-            printf(" %s|[%10d] | ", T_DARK, token[pos][0]);
-            for(unsigned short i = token[pos][1]; i < (token[pos][1] + token[pos][2]); i++){ printf("%c", input[i]); }
-            for(unsigned short i = 0; i < (17 - token[pos][2]); i++){ printf(" "); } printf("|%s", T_END);
-            printf("%s %-10u |%s", T_DARK, token[pos][3], T_END);
-            if(pos == (page * MAX_PAGESIZE) - 1){
-                printf(" press '+' & ENTER for more.. ");
-                unsigned char t;
-                while((t = getchar()) != '\n')
-                    if(t == '+'){ page++; printf("\r%s%s%s%s\r", T_UP, T_HORIZ_ABS, T_ERASE_LINE, T_DOWN);} else break;
-            }else printf("\n");
-        }
-        printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
-        return 0;
-    }else if(choice == LEXIC && input[0] != '\0'){
-        printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
-        printf(" %s| lexic[n]    | token[hash]      | count      |%s\n", T_DARK, T_END);
-        printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
-        for(pos = 0; pos < MAX_WORDS; pos++)
-            if(lexic[pos][1] > 0)
-                printf(" %s|[%10d] | %-16u | %-10u |%s\n", T_DARK, pos, lexic[pos][0], lexic[pos][1], T_END);
-        printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
-        return 0;
-
-    }else return 999;
+void display_menu(){
+    printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                 T_END  );
+    printf(" %s| Pick one of the following operations:       |%s\n",    T_CYAN,                 T_END  );
+    printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                 T_END  );
+    printf(" %s|  %c. Write new                               |%s\n",   T_CYAN, INSERT,         T_END  );
+    printf(" %s|  %c. Append                                  |%s\n",   T_CYAN, APPEND,         T_END  );
+    printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
+    printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, STATS,          T_END  );
+    printf(" %s|  %c. Display Input                           |%s\n",   T_CYAN, INPUT,          T_END  );
+    printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, TOKENS,         T_END  );
+    printf(" %s|  %c. Display Lexic                           |%s\n",   T_CYAN, LEXIC,          T_END  );
+    printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
+    printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,           T_END  );
+    printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                 T_END  );
 }
+
+void display_input(unsigned char input[]){
+    printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
+    printf(" %s| array[n]    | address        | char | value |%s\n", T_DARK, T_END);
+    printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
+    for(pos = 0; pos < (page * MAX_PAGESIZE) && input[pos] != '\0'; pos++){
+        printf(" %s|[%10d] | %-10p | %-4d | %-6s|%s"
+            , T_DARK
+            , pos
+            , (void*)&input[pos]
+            , input[pos]
+            , (input[pos] == '\n' ? T_CHAR_CR "     " : (char[]){ input[pos], '\0' })
+            , T_END
+        );
+        if(pos == (page * MAX_PAGESIZE) - 1){
+            printf(" press '+' & ENTER for more.. ");
+            unsigned char t;
+            while((t = getchar()) != '\n')
+                if(t == '+'){ page++; printf("\r%s%s%s%s\r", T_UP, T_HORIZ_ABS, T_ERASE_LINE, T_DOWN);} else break;
+        }else printf("\n");
+    }
+    printf(" %s+-------------+----------------+------+-------+%s\n\n", T_DARK, T_END);
+}
+
+void display_stats(unsigned char input[]){
+    unsigned int rows = 0, words = 0, chars;
+    unsigned char chr, prev = '\0';
+    printf(" %s+---------------------------------------------+%s\n", T_DARK, T_END);
+    printf(" %s| Stats                                       |%s\n", T_DARK, T_END);
+    printf(" %s+---------------------------------------------+%s\n", T_DARK, T_END);
+    for(chars = 0; (chr = input[chars]) != '\0'; chars++){
+        if(chr == '\n') rows++;
+        if(
+            ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9'))
+            && (prev < '0' || (prev > '9' && prev < 'A') || ((prev > 'Z' && prev < 'a') && prev > 'z'))
+        ) ++words;
+        prev = chr;
+    }
+    printf(" %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
+    printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
+}
+
+void display_tokens(unsigned int token[][4], unsigned char input[]){
+    printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
+    printf(" %s| token[n]    | value            | hash[djb2] |%s\n", T_DARK, T_END);
+    printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
+    for(pos = 0; pos < (page * MAX_PAGESIZE) && token[pos][2] != '\0'; pos++){
+        printf(" %s|[%10d] | ", T_DARK, token[pos][0]);
+        for(unsigned short i = token[pos][1]; i < (token[pos][1] + token[pos][2]); i++){ printf("%c", input[i]); }
+        for(unsigned short i = 0; i < (17 - token[pos][2]); i++){ printf(" "); } printf("|%s", T_END);
+        printf("%s %-10u |%s", T_DARK, token[pos][3], T_END);
+        if(pos == (page * MAX_PAGESIZE) - 1){
+            printf(" press '+' & ENTER for more.. ");
+            unsigned char t;
+            while((t = getchar()) != '\n')
+                if(t == '+'){ page++; printf("\r%s%s%s%s\r", T_UP, T_HORIZ_ABS, T_ERASE_LINE, T_DOWN);} else break;
+        }else printf("\n");
+    }
+    printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
+}
+
+void display_lexic(unsigned int lexic[][2]){
+    printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
+    printf(" %s| lexic[n]    | token[hash]      | count      |%s\n", T_DARK, T_END);
+    printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
+    for(pos = 0; pos < MAX_WORDS; pos++)
+        if(lexic[pos][1] > 0)
+            printf(" %s|[%10d] | %-16u | %-10u |%s\n", T_DARK, pos, lexic[pos][0], lexic[pos][1], T_END);
+    printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
+}
+
