@@ -17,7 +17,7 @@ int main(void) {
             tokenize(input); 
             lexicalize(token); 
             display(STATS); 
-        }else if (
+       }else if (
             choice      == STATS
             || choice   == INPUT
             || choice   == TOKENS

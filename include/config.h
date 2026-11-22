@@ -6,6 +6,7 @@
 #define MAX_CHARS       INT_MAX
 #define MAX_TOKENS      200000000
 #define MAX_WORDS       1000000
+#define MAX_PAGESIZE    50
 
 #define T_CYAN          "\033[44m\033[37m"
 #define T_DARK          "\033[38;5;51;48;5;234m"

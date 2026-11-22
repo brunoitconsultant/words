@@ -5,8 +5,6 @@
 #include "lexic.h"
 #include "token.h"
 
-#define MAX_PAGESIZE    50
-
 int display(char choice){
     unsigned int pos, page = 1;
 
