@@ -1,4 +1,3 @@
-
 > Library:                                              /* stores books */
     two dimension byte-array
         [n] ABCDEFGHIFKLMNOPQRSTUVWXYZ0...9
