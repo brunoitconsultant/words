@@ -1,3 +1,11 @@
+##  DATASHEET
+<img width="927" height="767" alt="image" src="https://github.com/user-attachments/assets/4948fb5a-3cd4-415d-bf6a-b5d73a6ae591" />
+### > TF:
+<img width="465" height="51" alt="image" src="https://github.com/user-attachments/assets/5892ef87-4324-4ae2-9317-4321f97e9097" />
+### > IDF:
+<img width="451" height="52" alt="image" src="https://github.com/user-attachments/assets/3f136c09-3f22-4d8c-9198-8969825eebc2" />
+### > TFIDF = TF * IDF
+
 ##  DEPENDENCIES
 <img width="716" height="201" alt="image" src="https://github.com/user-attachments/assets/6b4cb58c-0870-4119-8f9e-b561f81c53e6" />
 
