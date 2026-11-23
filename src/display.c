@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "config.h"
 #include "display.h"
 
 unsigned int pos, page = 1;
@@ -8,30 +7,57 @@ void display_menu(){
     printf(" %s+---------------------------------------------+%s" "\n", T_CYAN,                 T_END  );
     printf(" %s| Pick one of the following operations:       |%s\n",    T_CYAN,                 T_END  );
     printf(" %s+---------------------------------------------+%s\n",    T_CYAN,                 T_END  );
-    printf(" %s|  %c. Write: The Clockwork Orchard            |%s\n",   T_CYAN, BOOK_1,         T_END  );
-    printf(" %s|  %c. Write: Whispers of the Deep Reef        |%s\n",   T_CYAN, BOOK_2,         T_END  );
-    printf(" %s|  %c. Write: A Guide to Midnight Baking       |%s\n",   T_CYAN, BOOK_3,         T_END  );
+    printf(" %s|  %c. Write Book 'The Clockwork Orchard'      |%s\n",   T_CYAN, BOOK_1,         T_END  );
+    printf(" %s|  %c. Write Book 'Whispers of the Deep Reef'  |%s\n",   T_CYAN, BOOK_2,         T_END  );
+    printf(" %s|  %c. Write Book 'A Guide to Midnight Baking' |%s\n",   T_CYAN, BOOK_3,         T_END  );
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
-    printf(" %s|  %c. Display: Statistics                     |%s\n",   T_CYAN, STATS,          T_END  );
-    printf(" %s|  %c. Display: Input                          |%s\n",   T_CYAN, INPUT,          T_END  );
-    printf(" %s|  %c. Display: Tokens                         |%s\n",   T_CYAN, TOKENS,         T_END  );
-    printf(" %s|  %c. Display: Lexic                          |%s\n",   T_CYAN, LEXIC,          T_END  );
+    printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, STATS,          T_END  );
+    printf(" %s|  %c. Display Whole Library                   |%s\n",   T_CYAN, LIBRARY,        T_END  );
+    printf(" %s|  %c. Display Current Book                    |%s\n",   T_CYAN, BOOK,           T_END  );
+    printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, TOKENS,         T_END  );
+    printf(" %s|  %c. Display Lexic                           |%s\n",   T_CYAN, LEXIC,          T_END  );
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
     printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,           T_END  );
     printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                 T_END  );
 }
 
-void display_input(unsigned char input[]){
+void display_library(unsigned char library[][MAX_CHARS]){
     printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
     printf(" %s| array[n]    | address        | char | value |%s\n", T_DARK, T_END);
     printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
-    for(pos = 0; pos < (page * MAX_PAGESIZE) && input[pos] != '\0'; pos++){
+    
+    for(unsigned short book = 0; book < MAX_LIBRARY; book++){
+        for(pos = 0; pos < (page * MAX_PAGESIZE) && library[book][pos] != '\0'; pos++){
+            printf(" %s|[%10d] | %-10p | %-4d | %-6s|%s"
+                , T_DARK
+                , pos
+                , (void*)&library[book][pos]
+                , library[book][pos]
+                , (library[book][pos] == '\n' ? T_CHAR_CR "     " : (char[]){ library[book][pos], '\0' })
+                , T_END
+            );
+            if(pos == (page * MAX_PAGESIZE) - 1){
+                printf(" press '+' & ENTER for more.. ");
+                unsigned char t;
+                while((t = getchar()) != '\n')
+                    if(t == '+'){ page++; printf("\r%s%s%s%s\r", T_UP, T_HORIZ_ABS, T_ERASE_LINE, T_DOWN);} else break;
+            }else printf("\n");
+        }
+    }
+    printf(" %s+-------------+----------------+------+-------+%s\n\n", T_DARK, T_END);
+}
+
+void display_book(unsigned char book[]){
+    printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
+    printf(" %s| array[n]    | address        | char | value |%s\n", T_DARK, T_END);
+    printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
+    for(pos = 0; pos < (page * MAX_PAGESIZE) && book[pos] != '\0'; pos++){
         printf(" %s|[%10d] | %-10p | %-4d | %-6s|%s"
             , T_DARK
             , pos
-            , (void*)&input[pos]
-            , input[pos]
-            , (input[pos] == '\n' ? T_CHAR_CR "     " : (char[]){ input[pos], '\0' })
+            , (void*)&book[pos]
+            , book[pos]
+            , (book[pos] == '\n' ? T_CHAR_CR "     " : (char[]){ book[pos], '\0' })
             , T_END
         );
         if(pos == (page * MAX_PAGESIZE) - 1){
