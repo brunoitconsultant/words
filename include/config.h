@@ -3,10 +3,11 @@
 
 #include <limits.h>
 
+#define MAX_LIBRARY         3
 #define MAX_CHARS           INT_MAX
 #define MAX_TOKENS          200000000
 #define MAX_WORDS           1000000
-#define MAX_PAGESIZE        50
+#define MAX_PAGESIZE        40
 
 #define T_CYAN              "\033[44m\033[37m"
 #define T_DARK              "\033[38;5;51;48;5;234m"
@@ -20,8 +21,9 @@
 
 enum menu {
     SHOW                    = '0'
-    ,INSERT                 = '1'
-    ,APPEND                 = '2'
+    ,BOOK_1                 = '1'
+    ,BOOK_2                 = '2'
+    ,BOOK_3                 = '3'
     ,STATS                  = '5'
     ,INPUT                  = '6'
     ,TOKENS                 = '7'

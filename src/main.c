@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "config.h"
 #include "display.h"
-#include "input.h"
+#include "library.h"
 #include "lexic.h"
 #include "token.h"
 
@@ -13,14 +13,17 @@ int main(void) {
     while(1){
         choice = menu();
         if      (choice == EXIT)                        return 0;
-        else if (choice == INSERT || choice == APPEND)  { 
-            write(choice); 
-            tokenize(input); 
+        else if (
+            choice == BOOK_1 
+            || choice == BOOK_2 
+            || choice == BOOK_3)  
+        {   write(choice); 
+            tokenize(library); 
             lexicalize(token); 
-            display_stats(input);}
-        else if(choice  == STATS)                       display_stats(input);
-        else if(choice  == INPUT)                       display_input(input);
-        else if(choice  == TOKENS)                      display_tokens(token, input);
+            display_stats(library);}
+        else if(choice  == STATS)                       display_stats(library);
+        else if(choice  == INPUT)                       display_input(library);
+        else if(choice  == TOKENS)                      display_tokens(token, library);
         else if(choice  == LEXIC)                       display_lexic(lexic);
         else                                            return 999;
     }
