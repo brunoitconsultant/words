@@ -1,14 +1,14 @@
 
-Input
-    data (one dimentional array of bytes):
-            ->  ABCDEFGHIFKLMNOPQRSTUVWXYZ
-Token
-    data (4 dimentional array of bytes):
-        [0] ->  id (incremental)
-        [1] ->  start
-        [2] ->  length
-        [3] ->  hash (djb2)
-Lexic
-    data (2 dimentional array of bytes):
-        [0] ->  token id
-        [1] ->  count
+> Input:
+    single dimension byte-array
+        ABCDEFGHIFKLMNOPQRSTUVWXYZ0...9
+> Token:
+    four dimension byte-array
+        [0] id (auto-increment)
+        [1] start
+        [2] length
+        [3] hash (djb2)
+> Lexic:
+    two dimension byte-array
+        [0] id (token)
+        [1] count
