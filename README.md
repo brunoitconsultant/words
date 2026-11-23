@@ -10,7 +10,7 @@
 ### > TFIDF = TF * IDF
 
 ##  DEPENDENCIES
-<img width="716" height="201" alt="image" src="https://github.com/user-attachments/assets/6b4cb58c-0870-4119-8f9e-b561f81c53e6" />
+<img width="770" height="224" alt="image" src="https://github.com/user-attachments/assets/a42eaecf-4723-4225-8c94-7c1ead549f4e" />
 
 ##  RUN IN BASH
 ### > GET SOURCES
@@ -76,3 +76,4 @@ Common Examples:
 - ***x/16xb &prev***: Dumps 16 raw bytes in hexadecimal starting at prev's memory address.
 - x/12hu token: Dumps the first 12 unsigned short values in decimal from the token array.
 - x/s input: Reads and prints input as a null-terminated C string.
+
