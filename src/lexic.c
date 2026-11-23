@@ -15,5 +15,5 @@ int lexicalize(unsigned int token[][4]){
 }
 
 static void clear(void){
-    for(unsigned int i = 0; i < MAX_WORDS; i++){ lexic[i][0] = 0; lexic[i][1] = 0; }
+    for(unsigned int i = 0; i < MAX_WORDS; i++){ lexic[i][0] = '\0'; lexic[i][1] = '\0'; }
 }
