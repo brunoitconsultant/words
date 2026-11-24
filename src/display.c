@@ -13,7 +13,6 @@ void display_menu(){
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
     printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, STATS,          T_END  );
     printf(" %s|  %c. Display Whole Library                   |%s\n",   T_CYAN, LIBRARY,        T_END  );
-    printf(" %s|  %c. Display Current Book                    |%s\n",   T_CYAN, BOOK,           T_END  );
     printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, TOKENS,         T_END  );
     printf(" %s|  %c. Display Lexic                           |%s\n",   T_CYAN, LEXIC,          T_END  );
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
@@ -43,29 +42,6 @@ void display_library(unsigned char library[][MAX_CHARS]){
                     if(t == '+'){ page++; printf("\r%s%s%s%s\r", T_UP, T_HORIZ_ABS, T_ERASE_LINE, T_DOWN);} else break;
             }else printf("\n");
         }
-    }
-    printf(" %s+-------------+----------------+------+-------+%s\n\n", T_DARK, T_END);
-}
-
-void display_book(unsigned char book[]){
-    printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
-    printf(" %s| array[n]    | address        | char | value |%s\n", T_DARK, T_END);
-    printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
-    for(pos = 0; pos < (page * MAX_PAGESIZE) && book[pos] != '\0'; pos++){
-        printf(" %s|[%10d] | %-10p | %-4d | %-6s|%s"
-            , T_DARK
-            , pos
-            , (void*)&book[pos]
-            , book[pos]
-            , (book[pos] == '\n' ? T_CHAR_CR "     " : (char[]){ book[pos], '\0' })
-            , T_END
-        );
-        if(pos == (page * MAX_PAGESIZE) - 1){
-            printf(" press '+' & ENTER for more.. ");
-            unsigned char t;
-            while((t = getchar()) != '\n')
-                if(t == '+'){ page++; printf("\r%s%s%s%s\r", T_UP, T_HORIZ_ABS, T_ERASE_LINE, T_DOWN);} else break;
-        }else printf("\n");
     }
     printf(" %s+-------------+----------------+------+-------+%s\n\n", T_DARK, T_END);
 }

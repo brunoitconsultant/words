@@ -1,11 +1,9 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include <limits.h>
-
 #define MAX_LIBRARY         3
-#define MAX_CHARS           INT_MAX
-#define MAX_TOKENS          200000000
+#define MAX_CHARS           700000000
+#define MAX_TOKENS          100000000
 #define MAX_WORDS           1000000
 #define MAX_PAGESIZE        40
 
@@ -26,9 +24,8 @@ enum menu {
     ,BOOK_3                 = '3'
     ,STATS                  = '4'
     ,LIBRARY                = '5'
-    ,BOOK                   = '6'
-    ,TOKENS                 = '7'
-    ,LEXIC                  = '8'
-    ,EXIT                   = '9'
+    ,TOKENS                 = '6'
+    ,LEXIC                  = '7'
+    ,EXIT                   = '8'
 };
 #endif

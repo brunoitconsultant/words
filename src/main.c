@@ -19,7 +19,6 @@ int main(void) {
         else if (choice     == BOOK_3   )   { book = BOOK_3 - '1' ; write(choice); tokenize(library[book]); lexicalize(token); display_stats(library[book]); }
         else if (choice     == STATS    )   display_stats(library[book]);
         else if (choice     == LIBRARY  )   display_library(library);
-        else if (choice     == BOOK     )   display_book(library[book]);
         else if (choice     == TOKENS   )   display_tokens(token, library[book]);
         else if (choice     == LEXIC    )   display_lexic(lexic);
         else                                return 999;
