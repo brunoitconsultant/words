@@ -17,8 +17,10 @@ int tokenize(unsigned char input[MAX_CHARS]){
                 token[id][2] = 1;
                 id++;
             }else break;
-        }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')) token[id-1][2]++;
-        else token[id-1][3] = djb2(input, token[id-1][1], token[id-1][2]);
+        }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')){
+            token[id-1][2]++;
+            token[id-1][3] = djb2(input, token[id-1][1], token[id-1][2]);
+        }
         prev = chr;
     }
     token[id][2] = '\0';
