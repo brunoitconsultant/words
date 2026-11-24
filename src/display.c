@@ -11,8 +11,8 @@ void display_menu(){
     printf(" %s|  %c. Write Book 'Whispers of the Deep Reef'  |%s\n",   T_CYAN, BOOK_2,         T_END  );
     printf(" %s|  %c. Write Book 'A Guide to Midnight Baking' |%s\n",   T_CYAN, BOOK_3,         T_END  );
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
-    printf(" %s|  %c. Display Statistics                      |%s\n",   T_CYAN, STATS,          T_END  );
-    printf(" %s|  %c. Display Whole Library                   |%s\n",   T_CYAN, LIBRARY,        T_END  );
+    printf(" %s|  %c. Display Library Statistics              |%s\n",   T_CYAN, STATS,          T_END  );
+    printf(" %s|  %c. Display Library Content                 |%s\n",   T_CYAN, LIBRARY,        T_END  );
     printf(" %s|  %c. Display Tokens                          |%s\n",   T_CYAN, TOKENS,         T_END  );
     printf(" %s|  %c. Display Lexic                           |%s\n",   T_CYAN, LEXIC,          T_END  );
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
@@ -23,8 +23,7 @@ void display_menu(){
 void display_library(unsigned char library[][MAX_CHARS]){
     printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
     printf(" %s| array[n]    | address        | char | value |%s\n", T_DARK, T_END);
-    printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);
-    
+    printf(" %s+-------------+----------------+------+-------+%s\n", T_DARK, T_END);  
     for(unsigned short book = 0; book < MAX_LIBRARY; book++){
         for(pos = 0; pos < (page * MAX_PAGESIZE) && library[book][pos] != '\0'; pos++){
             printf(" %s|[%10d] | %-10p | %-4d | %-6s|%s"
@@ -46,21 +45,24 @@ void display_library(unsigned char library[][MAX_CHARS]){
     printf(" %s+-------------+----------------+------+-------+%s\n\n", T_DARK, T_END);
 }
 
-void display_stats(unsigned char input[]){
-    unsigned int rows = 0, words = 0, chars;
+void display_stats(unsigned char library[][MAX_CHARS]){
+    unsigned int books = 0, rows = 0, words = 0, chars = 0;
     unsigned char chr, prev = '\0';
     printf(" %s+---------------------------------------------+%s\n", T_DARK, T_END);
     printf(" %s| Stats                                       |%s\n", T_DARK, T_END);
     printf(" %s+---------------------------------------------+%s\n", T_DARK, T_END);
-    for(chars = 0; (chr = input[chars]) != '\0'; chars++){
-        if(chr == '\n') rows++;
-        if(
-            ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9'))
-            && (prev < '0' || (prev > '9' && prev < 'A') || ((prev > 'Z' && prev < 'a') && prev > 'z'))
-        ) ++words;
-        prev = chr;
+    for(unsigned short book = 0; book < MAX_LIBRARY; book++){
+        if(library[book][0] != '\0') books++;
+        for(unsigned int c = 0; (chr = library[book][c]) != '\0'; c++){
+            if(chr == '\n') rows++; else chars++;
+            if(
+                ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9'))
+                && (prev < '0' || (prev > '9' && prev < 'A') || ((prev > 'Z' && prev < 'a') && prev > 'z'))
+            ) ++words;
+            prev = chr;
+        }
     }
-    printf(" %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
+    printf(" %s| Books: %-36d |%s\n %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, books, T_END, T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
     printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
 }
 

@@ -12,6 +12,3 @@
         [0] derived from Token's hash, calculating % 100000 & clash conflit 
         [1] count
 
-
-
-

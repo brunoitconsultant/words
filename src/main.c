@@ -14,10 +14,10 @@ int main(void) {
     while(1){
         choice = menu();
         if      (choice     == EXIT     )   return 0;
-        else if (choice     == BOOK_1   )   { book = BOOK_1 - '1' ; write(choice); tokenize(library[book]); lexicalize(token); display_stats(library[book]); }
-        else if (choice     == BOOK_2   )   { book = BOOK_2 - '1' ; write(choice); tokenize(library[book]); lexicalize(token); display_stats(library[book]); }
-        else if (choice     == BOOK_3   )   { book = BOOK_3 - '1' ; write(choice); tokenize(library[book]); lexicalize(token); display_stats(library[book]); }
-        else if (choice     == STATS    )   display_stats(library[book]);
+        else if (choice     == BOOK_1   )   { book = BOOK_1 - '1' ; write(choice); tokenize(library[book]); lexicalize(token); display_stats(library); }
+        else if (choice     == BOOK_2   )   { book = BOOK_2 - '1' ; write(choice); tokenize(library[book]); lexicalize(token); display_stats(library); }
+        else if (choice     == BOOK_3   )   { book = BOOK_3 - '1' ; write(choice); tokenize(library[book]); lexicalize(token); display_stats(library); }
+        else if (choice     == STATS    )   display_stats(library);
         else if (choice     == LIBRARY  )   display_library(library);
         else if (choice     == TOKENS   )   display_tokens(token, library[book]);
         else if (choice     == LEXIC    )   display_lexic(lexic);
