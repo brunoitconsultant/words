@@ -5,7 +5,8 @@
         [i][0]  doc             > hash
         [i][1]  start           > term start
         [i][2]  length          > term length
-        [i][3]  hash            > djb2 (or term)
+        [i][3]  hash            > djb2 (of term)
 > TF                                                            /* 2D byte-array (holds term freq by doc)   */
-        [i][0]
-        [i][1]  count
+        [i][0]  doc             > hash
+        [i][1]  hash            > djb2 (of term)
+        [i][2]  count           > term count (by doc)
