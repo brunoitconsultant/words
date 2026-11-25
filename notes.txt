@@ -1,12 +1,13 @@
-> Document                                                      /* 2D byte-array (holds documents)          */
-        [i][0]  data            > ABCDEFGH...VWXYZ0...9
-        [i][1]  hash            > djb2 (of data)
-> Term                                                          /* 2D byte-array (holds all doc terms)      */
-        [i][0]  doc             > hash
-        [i][1]  start           > term start
-        [i][2]  length          > term length
-        [i][3]  hash            > djb2 (of term)
-> TF                                                            /* 2D byte-array (holds term freq by doc)   */
-        [i][0]  doc             > hash
-        [i][1]  hash            > djb2 (of term)
-        [i][2]  count           > term count (by doc)
+> Document                  /* 2D byte-array (holds documents)          */
+    [i][n]  hash + data     > djb2 (of data) + data (ABCDEFGH...VWXYZ0...9)
+
+> Term                      /* 2D byte-array (holds all doc terms)      */
+    [i][0]  doc             > hash
+    [i][1]  start           > term start
+    [i][2]  length          > term length
+    [i][3]  hash            > djb2 (of term)
+
+> TF                        /* 2D byte-array (holds term freq by doc)   */
+    [i][0]  doc             > hash
+    [i][1]  hash            > djb2 (of term)
+    [i][2]  count           > term count (by doc)
