@@ -2,8 +2,8 @@
 #define CONFIG_H
 
 #define MAX_DOCS            3
-#define MAX_CHARS           700000000
-#define MAX_TOKENS          100000000
+#define MAX_CHARS           200000000
+#define MAX_TOKENS          50000000
 #define MAX_WORDS           1000000
 #define MAX_PAGESIZE        40
 
