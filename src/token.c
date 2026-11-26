@@ -3,10 +3,10 @@
 
 unsigned int token[MAX_TOKENS][4] = { { '\0' } };
 
-int tokenize(unsigned char book[MAX_CHARS]){
+int tokenize(unsigned char document[MAX_CHARS]){
     unsigned char chr, prev = '\0';
     unsigned int id = 0;
-    for(unsigned int i = 0; ((chr = book[i]) != '\0'); i++){
+    for(unsigned int i = 0; ((chr = document[i]) != '\0'); i++){
         if(
             ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9'))
             && ((prev < '0' || (prev > '9' && prev < 'A') || ((prev > 'Z' && prev < 'a') && prev > 'z')))
@@ -19,7 +19,7 @@ int tokenize(unsigned char book[MAX_CHARS]){
             }else break;
         }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')){
             token[id-1][2]++;
-            token[id-1][3] = djb2(book, token[id-1][1], token[id-1][2]);
+            token[id-1][3] = djb2(document, token[id-1][1], token[id-1][2]);
         }
         prev = chr;
     }
