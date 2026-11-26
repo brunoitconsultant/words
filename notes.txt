@@ -1,14 +1,13 @@
-> Library:                                              /* stores books */
-    two dimension byte-array
-        [n] ABCDEFGHIFKLMNOPQRSTUVWXYZ0...9
-> Token:                                                /* stores words in books */
-    four dimension byte-array
-        [0] id (auto-increment)
-        [1] start
-        [2] length
-        [3] hash (djb2)
-> Lexic:                                                /* stores word count */
-    two dimension byte-array
-        [0] derived from Token's hash, calculating % 100000 & clash conflit 
-        [1] count
+> Document                  /* 2D byte-array (holds documents)          */
+    [i][n]  hash + data     > djb2 (of data) + data (ABCDEFGH...VWXYZ0...9)
 
+> Term                      /* 2D byte-array (holds all doc terms)      */
+    [i][0]  doc             > hash
+    [i][1]  start           > term start
+    [i][2]  length          > term length
+    [i][3]  hash            > djb2 (of term)
+
+> TF                        /* 2D byte-array (holds term freq by doc)   */
+    [i][0]  doc             > hash
+    [i][1]  hash            > djb2 (of term)
+    [i][2]  count           > term count (by doc)

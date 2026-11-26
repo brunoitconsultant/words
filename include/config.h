@@ -1,9 +1,9 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define MAX_LIBRARY         3
-#define MAX_CHARS           700000000
-#define MAX_TOKENS          100000000
+#define MAX_DOCS            3
+#define MAX_CHARS           200000000
+#define MAX_TOKENS          50000000
 #define MAX_WORDS           1000000
 #define MAX_PAGESIZE        40
 
@@ -19,11 +19,11 @@
 
 enum menu {
     SHOW                    = '0'
-    ,BOOK_1                 = '1'
-    ,BOOK_2                 = '2'
-    ,BOOK_3                 = '3'
+    ,DOC_1                  = '1'
+    ,DOC_2                  = '2'
+    ,DOC_3                  = '3'
     ,STATS                  = '4'
-    ,LIBRARY                = '5'
+    ,DOCS                   = '5'
     ,TOKENS                 = '6'
     ,LEXIC                  = '7'
     ,EXIT                   = '8'
