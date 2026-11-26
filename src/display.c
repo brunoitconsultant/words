@@ -66,7 +66,7 @@ void display_stats(unsigned char documents[][MAX_CHARS]){
     printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
 }
 
-void display_tokens(unsigned int token[][4], unsigned char input[]){
+void display_tokens(unsigned int token[][5], unsigned char input[]){
     printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
     printf(" %s| token[n]    | value            | hash[djb2] |%s\n", T_DARK, T_END);
     printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);

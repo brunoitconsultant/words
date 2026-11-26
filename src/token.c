@@ -1,9 +1,9 @@
 #include "djb2.h"
 #include "token.h"
 
-unsigned int token[MAX_TOKENS][4] = { { '\0' } };
+unsigned int token[MAX_TOKENS][5] = { { '\0' } };
 
-int tokenize(unsigned char document[MAX_CHARS]){
+int tokenize(unsigned char document[MAX_CHARS], unsigned short docid){
     unsigned char chr, prev = '\0';
     unsigned int id = 0;
     for(unsigned int i = 0; ((chr = document[i]) != '\0'); i++){
@@ -15,6 +15,7 @@ int tokenize(unsigned char document[MAX_CHARS]){
                 token[id][0] = id;
                 token[id][1] = i;
                 token[id][2] = 1;
+                token[id][4] = docid;
                 id++;
             }else break;
         }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')){
