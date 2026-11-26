@@ -19,7 +19,7 @@ int main(void) {
         else if (choice     == DOC_3    )   { id = DOC_3 - '1' ; upload(choice); tokenize(document[id], id); lexicalize(token); display_stats(document); }
         else if (choice     == STATS    )   display_stats(document);
         else if (choice     == DOCS     )   display_library(document);
-        else if (choice     == TOKENS   )   display_tokens(token, document[id]);
+        else if (choice     == TOKENS   )   display_tokens(token, document);
         else if (choice     == LEXIC    )   display_lexic(lexic);
         else                                return 999;
     }
