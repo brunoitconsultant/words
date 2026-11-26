@@ -70,11 +70,11 @@ void display_tokens(unsigned int token[][5], unsigned char input[]){
     printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
     printf(" %s| token[n]    | value            | hash[djb2] |%s\n", T_DARK, T_END);
     printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
-    for(pos = 0; pos < (page * MAX_PAGESIZE) && token[pos][2] != '\0'; pos++){
+    for(pos = 0; pos < (page * MAX_PAGESIZE) && token[pos][3] != '\0'; pos++){
         printf(" %s|[%10d] | ", T_DARK, token[pos][0]);
-        for(unsigned short i = token[pos][1]; i < (token[pos][1] + token[pos][2]); i++){ printf("%c", input[i]); }
-        for(unsigned short i = 0; i < (17 - token[pos][2]); i++){ printf(" "); } printf("|%s", T_END);
-        printf("%s %-10u |%s", T_DARK, token[pos][3], T_END);
+        for(unsigned short i = token[pos][2]; i < (token[pos][2] + token[pos][3]); i++){ printf("%c", input[i]); }
+        for(unsigned short i = 0; i < (17 - token[pos][3]); i++){ printf(" "); } printf("|%s", T_END);
+        printf("%s %-10u |%s", T_DARK, token[pos][4], T_END);
         if(pos == (page * MAX_PAGESIZE) - 1){
             printf(" press '+' & ENTER for more.. ");
             unsigned char t;
