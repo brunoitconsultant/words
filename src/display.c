@@ -62,7 +62,7 @@ void display_stats(unsigned char documents[][MAX_CHARS]){
             prev = chr;
         }
     }
-    printf(" %s| Docs: %-37d |%s\n %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, docs, T_END, T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
+    printf(" %s| Docs:  %-36d |%s\n %s| Chars: %-36d |%s\n %s| Rows:  %-36d |%s\n %s| Words: %-36d |%s\n", T_DARK, docs, T_END, T_DARK, chars, T_END, T_DARK, rows, T_END, T_DARK, words, T_END);
     printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
 }
 
@@ -87,13 +87,13 @@ void display_tokens(unsigned int token[][MAX_TOKENS][5], unsigned char document[
     printf(" %s+---------+---------+------------+------------+%s\n\n", T_DARK, T_END);
 }
 
-void display_lexic(unsigned int lexic[][2]){
-    printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
-    printf(" %s| lexic[n]    | token[hash]      | count      |%s\n", T_DARK, T_END);
-    printf(" %s+-------------+------------------+------------+%s\n", T_DARK, T_END);
-    for(pos = 0; pos < MAX_WORDS; pos++)
-        if(lexic[pos][1] > 0)
-            printf(" %s|[%10d] | %-16u | %-10u |%s\n", T_DARK, pos, lexic[pos][0], lexic[pos][1], T_END);
-    printf(" %s+-------------+------------------+------------+%s\n\n", T_DARK, T_END);
+void display_lexic(unsigned int lexic[][MAX_WORDS][2]){
+    printf(" %s+--------+------------+--------------+--------+%s\n", T_DARK, T_END);
+    printf(" %s| doc[n] | lexic[n]   | token[hash]  | count  |%s\n", T_DARK, T_END);
+    printf(" %s+--------+------------+--------------+--------+%s\n", T_DARK, T_END);
+    for(unsigned short doc = 0; doc < MAX_DOCS; doc++)
+        for(pos = 0; pos < MAX_WORDS; pos++)
+            if(lexic[doc][pos][1] > 0)
+                printf(" %s| [%4d] | [%8d] | %-12u | %-6u |%s\n", T_DARK, doc, pos, lexic[doc][pos][0], lexic[doc][pos][1], T_END);
+    printf(" %s+--------+------------+--------------+--------+%s\n\n", T_DARK, T_END);
 }
-
