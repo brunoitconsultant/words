@@ -32,7 +32,7 @@
                                                 : [6]   TF (term frequency)
                                                 : [7]   document count with term
                                                 : [8]   IDF (inverse document frequency)
-                                                : [9]   TFIDF (term frequency / inverse document frequency)
+                                                : [9]   TF/IDF (term frequency / inverse document frequency)
 
 ##################################################################################################################
 
