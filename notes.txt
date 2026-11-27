@@ -34,6 +34,7 @@
 
 new goals:
     > include new fields in Term to compute TF
+    > updating the dependencies matrix
 
 ##########################################################################################################
 

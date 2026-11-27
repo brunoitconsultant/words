@@ -32,9 +32,7 @@ int extract(unsigned char content[MAX_CHARS], unsigned short doc){
 }
 
 static void count(unsigned int term[][6]){  
-    for(unsigned int t = 0; t < (MAX_TERMS - 1) && term[t][3] != '\0'; t++){
-        unsigned int hash = term[t][4];
+    for(unsigned int t = 0; t < (MAX_TERMS - 1) && term[t][3] != '\0'; t++)
         for(unsigned int i = 0; i < (MAX_TERMS - 1) && term[i][3] != '\0'; i++)
-            if(hash == term[i][4]) term[t][5]++;
-    }
+            if(term[t][4] == term[i][4]) term[t][5]++;
 }

@@ -67,7 +67,7 @@ void display_stats(unsigned char documents[][MAX_CHARS]){
 
 void display_terms(unsigned int term[][MAX_TERMS][6], unsigned char document[][MAX_CHARS]){
     printf(" %s+--------+----------+------------+------------+%s\n", T_DARK, T_END);
-    printf(" %s| doc[n] | token[n] | value      | count      |%s\n", T_DARK, T_END);
+    printf(" %s| doc[n] | term[n]  | value      | count      |%s\n", T_DARK, T_END);
     printf(" %s+--------+----------+------------+------------+%s\n", T_DARK, T_END);
     for(unsigned short doc = 0; doc < MAX_DOCS; doc++){
         for(pos = 0; pos < (page * MAX_PAGESIZE) && term[doc][pos][3] != '\0'; pos++){
