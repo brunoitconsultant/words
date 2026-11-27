@@ -1,8 +1,8 @@
 #include "djb2.h"
 #include "term.h"
 
-float term[MAX_DOCS][MAX_TERMS][7] = { { { '\0' } } };
-static void tf(float term[][7]);
+float term[MAX_DOCS][MAX_TERMS][TERM_ATT] = { { { '\0' } } };
+static void tf(float term[][TERM_ATT]);
 
 int extract(unsigned char content[MAX_CHARS], unsigned short doc){
     unsigned char chr, prev = '\0';
@@ -13,31 +13,31 @@ int extract(unsigned char content[MAX_CHARS], unsigned short doc){
             && ((prev < '0' || (prev > '9' && prev < 'A') || ((prev > 'Z' && prev < 'a') && prev > 'z')))
         ){
             if(seq < (MAX_TERMS - 1)){
-                term[doc][seq][0] = seq;
-                term[doc][seq][1] = doc;
-                term[doc][seq][2] = i;
-                term[doc][seq][3] = 1;
-                term[doc][seq][5] = 0;
-                term[doc][seq][6] = 0;
+                term[doc][seq][TERM_DOC]    = doc;
+                term[doc][seq][TERM_SEQ]    = seq;
+                term[doc][seq][TERM_START]  = i;
+                term[doc][seq][TERM_LENGTH] = 1;
+                term[doc][seq][TERM_CNT]    = 0;
+                term[doc][seq][TERM_FREQ]   = 0;
                 seq++;
             }else break;
         }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')){
-            term[doc][seq-1][3]++;
-            term[doc][seq-1][4] = djb2(content, term[doc][seq-1][2], term[doc][seq-1][3]);
+            term[doc][seq-1][TERM_LENGTH]++;
+            term[doc][seq-1][TERM_HASH] = djb2(content, term[doc][seq-1][TERM_START], term[doc][seq-1][TERM_LENGTH]);
         }
         prev = chr;
     }
-    term[doc][seq][3] = '\0';
+    term[doc][seq][TERM_LENGTH] = '\0';
     tf(term[doc]);
     return 0;
 }
 
-static void tf(float term[][7]){ 
+static void tf(float term[][TERM_ATT]){ 
     unsigned int max = 0;
-    for(unsigned int t = 0; t < (MAX_TERMS - 1) && term[t][3] != '\0'; t++) max++;
+    for(unsigned int t = 0; t < (MAX_TERMS - 1) && term[t][TERM_LENGTH] != '\0'; t++) max++;
     for(unsigned int t = 0; t < max; t++){
         for(unsigned int i = 0; i < max; i++)
-            if(term[t][4] == term[i][4]) term[t][5]++;
-        term[t][6] = term[t][5] / max;
+            if(term[t][TERM_HASH] == term[i][TERM_HASH]) term[t][TERM_CNT]++;
+        term[t][TERM_FREQ] = term[t][TERM_CNT] / max;
     }
 }

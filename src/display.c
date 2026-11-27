@@ -65,16 +65,16 @@ void display_stats(unsigned char documents[][MAX_CHARS]){
     printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
 }
 
-void display_tf(float term[][MAX_TERMS][7], unsigned char document[][MAX_CHARS]){
+void display_tf(float term[][MAX_TERMS][TERM_ATT], unsigned char document[][MAX_CHARS]){
     printf(" %s+--------+----------+------------+------------+%s\n", T_DARK, T_END);
     printf(" %s| doc[n] | term[n]  | value      | term freq. |%s\n", T_DARK, T_END);
     printf(" %s+--------+----------+------------+------------+%s\n", T_DARK, T_END);
     for(unsigned short doc = 0; doc < MAX_DOCS; doc++){
-        for(pos = 0; pos < (page * MAX_PAGESIZE) && term[doc][pos][3] != '\0'; pos++){
-            printf(" %s| [%4d] | [%6.0f] | ", T_DARK, doc, term[doc][pos][0]);
-            for(unsigned short i = term[doc][pos][2]; i < (term[doc][pos][2] + term[doc][pos][3]); i++){ printf("%c", document[doc][i]); }
-            for(unsigned short i = 0; i < (11 - term[doc][pos][3]); i++){ printf(" "); } printf("|%s", T_END);
-            printf("%s %-10.8f |%s", T_DARK, term[doc][pos][6], T_END);
+        for(pos = 0; pos < (page * MAX_PAGESIZE) && term[doc][pos][TERM_LENGTH] != '\0'; pos++){
+            printf(" %s| [%4d] | [%6.0f] | ", T_DARK, doc, term[doc][pos][TERM_SEQ]);
+            for(unsigned short i = term[doc][pos][2]; i < (term[doc][pos][TERM_START] + term[doc][pos][TERM_LENGTH]); i++){ printf("%c", document[doc][i]); }
+            for(unsigned short i = 0; i < (11 - term[doc][pos][TERM_LENGTH]); i++){ printf(" "); } printf("|%s", T_END);
+            printf("%s %-10.8f |%s", T_DARK, term[doc][pos][TERM_FREQ], T_END);
             if(pos == (page * MAX_PAGESIZE) - 1){
                 printf(" press '+' & ENTER for more.. ");
                 unsigned char t;
@@ -85,3 +85,10 @@ void display_tf(float term[][MAX_TERMS][7], unsigned char document[][MAX_CHARS])
     }
     printf(" %s+---------+---------+------------+------------+%s\n\n", T_DARK, T_END);
 }
+
+
+
+
+
+
+

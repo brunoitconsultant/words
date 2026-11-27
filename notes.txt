@@ -20,14 +20,14 @@
 ##########################################################################################################
 
 > Document                  /* 2D byte-array    : holds documents                                       */
-    [d]                     > document id       : fixed for now, 0, 1, 2
-    [c]                     > char byte array   : ABCDEFGH...VWXYZ0...9
+    [d1]                    > document id       : fixed for now, 0, 1, 2
+    [d2]                    > char byte array   : ABCDEFGH...VWXYZ0...9
 
 
 > Term                      /* 3D byte-array    : holds all doc terms                                   */
-    [d]                     > document id       : reference to document
-    [s]                     > sequence id       : incremental term counter
-    [m]                     > metadata          : [0]   token sequence id
+    [d1]                    > document id       : reference to document
+    [d2]                    > sequence id       : incremental term counter
+    [d3]                    > metadata          : [0]   token sequence id
                                                 : [1]   document id
                                                 : [2]   token start pos
                                                 : [3]   token length
