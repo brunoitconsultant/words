@@ -18,6 +18,7 @@ int extract(unsigned char content[MAX_CHARS], unsigned short doc){
                 term[doc][seq][2] = i;
                 term[doc][seq][3] = 1;
                 term[doc][seq][5] = 0;
+                //term[doc][seq][6] = 0;
                 seq++;
             }else break;
         }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')){
@@ -31,8 +32,14 @@ int extract(unsigned char content[MAX_CHARS], unsigned short doc){
     return 0;
 }
 
-static void count(unsigned int term[][6]){  
-    for(unsigned int t = 0; t < (MAX_TERMS - 1) && term[t][3] != '\0'; t++)
-        for(unsigned int i = 0; i < (MAX_TERMS - 1) && term[i][3] != '\0'; i++)
+static void count(unsigned int term[][6]){ 
+
+    unsigned int max = 0;
+    for(unsigned int t = 0; t < (MAX_TERMS - 1) && term[t][3] != '\0'; t++) max++;
+
+
+ 
+    for(unsigned int t = 0; t < max; t++)
+        for(unsigned int i = 0; i < max; i++)
             if(term[t][4] == term[i][4]) term[t][5]++;
 }
