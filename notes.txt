@@ -1,30 +1,26 @@
-##########################################################################################################
+##################################################################################################################
 
 > Usefull commands
-    > git fetch ; git pull                                  /* update current branch from git (remote)  */
-    > git add . ; git commit -m "<<message>>" ; git push    /* update git from local                    */
-    > git checkout -b feature/<<branch>>                    /* create a feature branch                  */
-    > git push -u origin feature/<<branch>>                 /* push new branch to git (remote)          */
-
-    > gh auth login                                         /* login to GitHub (sudo apt install gh)    */
-    > gh pr create --title "<<title>>" --body "<<body>>"    /* create a pull request                    */
-    
+    > git fetch ; git pull                                          /* update current branch from git (remote)  */
+    > git add . ; git commit -m "<<message>>" ; git push            /* update git from local                    */
+    > git checkout -b feature/<<branch>>                            /* create a feature branch                  */
+    > git push -u origin feature/<<branch>>                         /* push new branch to git (remote)          */
+    > gh auth login                                                 /* login to GitHub (sudo apt install gh)    */
+    > gh pr create --title "<<title>>" --body "<<body>>"            /* create a pull request                    */
     > git checkout main ;
       git branch -d <<branch>> ;
       git push origin --delete <<branch>> ;
-      git fetch --prune                                     /* deletes old branch and cleanup           */
+      git fetch --prune                                             /* deletes old branch and cleanup           */
+    > clear ; cd ~/words ; make clean ; make -s ; ./tfidf           /* build the app                            */
 
+##################################################################################################################
 
-    clear ; cd ~/words ; make clean ; make -s ; ./tfidf     /* build the app                            */
-
-##########################################################################################################
-
-> Document                  /* 2D byte-array    : holds documents                                       */
+> Document                  /* 2D byte-array    : holds documents                                               */
     [d1]                    > document id       : fixed for now, 0, 1, 2
     [d2]                    > char byte array   : ABCDEFGH...VWXYZ0...9
 
 
-> Term                      /* 3D byte-array    : holds all doc terms                                   */
+> Term                      /* 3D byte-array    : holds all doc terms                                           */
     [d1]                    > document id       : reference to document
     [d2]                    > sequence id       : incremental term counter
     [d3]                    > metadata          : [0]   token sequence id
@@ -36,12 +32,12 @@
                                                 : [6]   TF (term frequency)
                                                 : [7]   document count with term
 
-##########################################################################################################
+##################################################################################################################
 
 new goals:
     > Build IDF
 
-##########################################################################################################
+##################################################################################################################
 
 
 
