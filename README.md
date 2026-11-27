@@ -10,7 +10,7 @@
 ### > TFIDF = TF * IDF
 
 ##  DEPENDENCIES
-<img width="783" height="224" alt="image" src="https://github.com/user-attachments/assets/94dd2546-1d54-4cf8-a05d-9e9832951109" />
+<img width="702" height="196" alt="image" src="https://github.com/user-attachments/assets/c2081e4f-04e7-421c-ad0c-d1d177f37bf3" />
 
 ##  RUN IN BASH
 ### > GET SOURCES
