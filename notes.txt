@@ -1,6 +1,8 @@
 > Usefull commands
     git fetch ; git pull                                    /* update current branch from git (remote)  */
     git add . ; git commit -m "<<message>>" ; git push      /* update git from local                    */
+    git checkout -b feature/<<branch>>                      /* create a feature branch                  */
+    git push -u origin feature/<<branch>>                   /* push new branch to git (remote)          */
 
 ##########################################################################################################
 > Document                  /* 2D byte-array    : holds documents                                       */
