@@ -18,7 +18,7 @@ int main(void) {
         else if (choice     == DOC_3    )   { id = DOC_3 - '1' ; upload(choice); extract(document[id], id); display_stats(document); }
         else if (choice     == STATS    )   display_stats   (document);
         else if (choice     == DOCS     )   display_library (document);
-        else if (choice     == TERMS    )   display_terms   (term, document);
+        else if (choice     == TF       )   display_tf      (term, document);
         else                                return 999;
     }
 }

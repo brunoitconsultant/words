@@ -15,7 +15,7 @@
     [c]                     > char byte array   : ABCDEFGH...VWXYZ0...9
 
 
-> Token                     /* 3D byte-array    : holds all doc terms                                   */
+> Term                      /* 3D byte-array    : holds all doc terms                                   */
     [d]                     > document id       : reference to document
     [s]                     > sequence id       : incremental term counter
     [m]                     > metadata          : [0]   token sequence id
@@ -23,17 +23,13 @@
                                                 : [2]   token start pos
                                                 : [3]   token length
                                                 : [4]   token hash(djb2)
+                                                : [5]   term count in document
+                                                : [6]   TF (term frequency)
 
-
-> Lexic                     /* 3D byte-array    : holds token frequency for each document               */
-    [d]                     > document id       : reference to document
-    [b]                     > bucket            : with colision control (term hash % 1000000)
-    [m]                     > metadata          : [0]   token hash(djb2)
-                                                : [1]   token counter
 ##########################################################################################################
 
 new goals:
-    > include new fields in Term to compute TF
+    > 
 
 ##########################################################################################################
 

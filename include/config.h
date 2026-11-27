@@ -23,7 +23,7 @@ enum menu {
     ,DOC_3                  = '3'
     ,STATS                  = '4'
     ,DOCS                   = '5'
-    ,TERMS                  = '6'
+    ,TF                     = '6'
     ,EXIT                   = '9'
 };
 #endif
