@@ -1,13 +1,30 @@
-> Document                  /* 2D byte-array (holds documents)          */
-    [i][n]  hash + data     > djb2 (of data) + data (ABCDEFGH...VWXYZ0...9)
+> Document                  /* 2D byte-array    : holds documents                           */
+    [d]                     > document id       : fixed for now, 0, 1, 2
+    [c]                     > char byte array   : ABCDEFGH...VWXYZ0...9
 
-> Term                      /* 2D byte-array (holds all doc terms)      */
-    [i][0]  doc             > hash
-    [i][1]  start           > term start
-    [i][2]  length          > term length
-    [i][3]  hash            > djb2 (of term)
 
-> TF                        /* 2D byte-array (holds term freq by doc)   */
-    [i][0]  doc             > hash
-    [i][1]  hash            > djb2 (of term)
-    [i][2]  count           > term count (by doc)
+> Token                     /* 3D byte-array    : holds all doc terms                       */
+    [d]                     > document id       : reference to document
+    [s]                     > sequence id       : incremental term counter
+    [m]                     > metadata          : [0]   token sequence id
+                                                : [1]   document id
+                                                : [2]   token start pos
+                                                : [3]   token length
+                                                : [4]   token hash(djb2)
+
+
+> Lexic                     /* 3D byte-array    : holds token frequency for each document   */
+    [d]                     > document id       : reference to document
+    [b]                     > bucket            : with colision control (term hash % 1000000)
+    [m]                     > metadata          : [0]   token hash(djb2)
+                                                : [1]   token counter
+
+
+
+
+
+
+new goals:
+    > rename token with Term
+    > delete Lexic and move functionality to Term
+    > include new fields in Term to compute TF
