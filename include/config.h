@@ -3,8 +3,7 @@
 
 #define MAX_DOCS            3
 #define MAX_CHARS           200000000
-#define MAX_TOKENS          50000000
-#define MAX_WORDS           1000000
+#define MAX_TERMS           50000000
 #define MAX_PAGESIZE        40
 
 #define T_CYAN              "\033[44m\033[37m"
@@ -24,8 +23,7 @@ enum menu {
     ,DOC_3                  = '3'
     ,STATS                  = '4'
     ,DOCS                   = '5'
-    ,TOKENS                 = '6'
-    ,LEXIC                  = '7'
-    ,EXIT                   = '8'
+    ,TERMS                  = '6'
+    ,EXIT                   = '9'
 };
 #endif
