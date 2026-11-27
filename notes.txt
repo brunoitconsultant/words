@@ -1,10 +1,19 @@
 ##########################################################################################################
 
 > Usefull commands
-    git fetch ; git pull                                    /* update current branch from git (remote)  */
-    git add . ; git commit -m "<<message>>" ; git push      /* update git from local                    */
-    git checkout -b feature/<<branch>>                      /* create a feature branch                  */
-    git push -u origin feature/<<branch>>                   /* push new branch to git (remote)          */
+    > git fetch ; git pull                                  /* update current branch from git (remote)  */
+    > git add . ; git commit -m "<<message>>" ; git push    /* update git from local                    */
+    > git checkout -b feature/<<branch>>                    /* create a feature branch                  */
+    > git push -u origin feature/<<branch>>                 /* push new branch to git (remote)          */
+
+    > gh auth login                                         /* login to GitHub (sudo apt install gh)    */
+    > gh pr create --title "<<title>>" --body "<<body>>"    /* create a pull request                    */
+    
+    > git checkout main ;
+      git branch -d <<branch>> ;
+      git push origin --delete <<branch>> ;
+      git fetch --prune                                     /* deletes old branch and cleanup           */
+
 
     clear ; cd ~/words ; make clean ; make -s ; ./tfidf     /* build the app                            */
 
@@ -29,7 +38,7 @@
 ##########################################################################################################
 
 new goals:
-    > 
+    > Build IDF
 
 ##########################################################################################################
 
