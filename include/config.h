@@ -2,8 +2,8 @@
 #define CONFIG_H
 
 #define MAX_DOCS            3
-#define MAX_CHARS           200000000
-#define MAX_TERMS           50000000
+#define MAX_CHARS           150000000
+#define MAX_TERMS           40000000
 #define MAX_PAGESIZE        40
 
 #define T_CYAN              "\033[44m\033[37m"

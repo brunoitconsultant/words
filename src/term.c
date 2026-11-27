@@ -18,9 +18,6 @@ int extract(unsigned char content[MAX_CHARS], unsigned short doc){
                 term[doc][seq][TERM_SEQ]        = seq;
                 term[doc][seq][TERM_START]      = i;
                 term[doc][seq][TERM_LENGTH]     = 1;
-                term[doc][seq][TERM_CNT]        = 0;
-                term[doc][seq][TERM_BOOK_CNT]   = 0;
-                term[doc][seq][TERM_FREQ]       = 0;
                 seq++;
             }else break;
         }else if ((chr >= 'A' && chr <= 'Z') || (chr >= 'a' && chr <= 'z') || (chr >= '0' && chr <= '9')){
