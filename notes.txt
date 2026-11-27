@@ -34,6 +34,7 @@
                                                 : [4]   token hash(djb2)
                                                 : [5]   term count in document
                                                 : [6]   TF (term frequency)
+                                                : [7]   document count with term
 
 ##########################################################################################################
 

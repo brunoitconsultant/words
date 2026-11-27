@@ -10,7 +10,8 @@ enum schema {
     ,TERM_HASH          = 4
     ,TERM_CNT           = 5
     ,TERM_FREQ          = 6
-    ,TERM_ATT           = 7
+    ,TERM_BOOK_CNT      = 7
+    ,TERM_ATT           = 8
 };
 
 extern float term[MAX_DOCS][MAX_TERMS][TERM_ATT];
