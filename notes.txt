@@ -1,14 +1,21 @@
+##########################################################################################################
+
 > Usefull commands
     git fetch ; git pull                                    /* update current branch from git (remote)  */
     git add . ; git commit -m "<<message>>" ; git push      /* update git from local                    */
+    git checkout -b feature/<<branch>>                      /* create a feature branch                  */
+    git push -u origin feature/<<branch>>                   /* push new branch to git (remote)          */
+
+    clear ; cd ~/words ; make clean ; make -s ; ./tfidf     /* build the app                            */
 
 ##########################################################################################################
+
 > Document                  /* 2D byte-array    : holds documents                                       */
     [d]                     > document id       : fixed for now, 0, 1, 2
     [c]                     > char byte array   : ABCDEFGH...VWXYZ0...9
 
 
-> Token                     /* 3D byte-array    : holds all doc terms                                   */
+> Term                      /* 3D byte-array    : holds all doc terms                                   */
     [d]                     > document id       : reference to document
     [s]                     > sequence id       : incremental term counter
     [m]                     > metadata          : [0]   token sequence id
@@ -16,19 +23,13 @@
                                                 : [2]   token start pos
                                                 : [3]   token length
                                                 : [4]   token hash(djb2)
+                                                : [5]   term count in document
+                                                : [6]   TF (term frequency)
 
-
-> Lexic                     /* 3D byte-array    : holds token frequency for each document               */
-    [d]                     > document id       : reference to document
-    [b]                     > bucket            : with colision control (term hash % 1000000)
-    [m]                     > metadata          : [0]   token hash(djb2)
-                                                : [1]   token counter
 ##########################################################################################################
 
 new goals:
-    > rename token with Term
-    > delete Lexic and move functionality to Term
-    > include new fields in Term to compute TF
+    > 
 
 ##########################################################################################################
 

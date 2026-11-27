@@ -11,10 +11,9 @@ void display_menu(){
     printf(" %s|  %c. Upload Doc 2                            |%s\n",   T_CYAN, DOC_2,          T_END  );
     printf(" %s|  %c. Upload Doc 3                            |%s\n",   T_CYAN, DOC_3,          T_END  );
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
-    printf(" %s|  %c. Print All Document Statistics           |%s\n",   T_CYAN, STATS,          T_END  );
-    printf(" %s|  %c. Print All Documents                     |%s\n",   T_CYAN, DOCS,           T_END  );
-    printf(" %s|  %c. Print Tokens                            |%s\n",   T_CYAN, TOKENS,         T_END  );
-    printf(" %s|  %c. Print Lexic                             |%s\n",   T_CYAN, LEXIC,          T_END  );
+    printf(" %s|  %c. Print Statistics                        |%s\n",   T_CYAN, STATS,          T_END  );
+    printf(" %s|  %c. Print Documents                         |%s\n",   T_CYAN, DOCS,           T_END  );
+    printf(" %s|  %c. Print TF                                |%s\n",   T_CYAN, TF,             T_END  );
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
     printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,           T_END  );
     printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                 T_END  );
@@ -66,16 +65,16 @@ void display_stats(unsigned char documents[][MAX_CHARS]){
     printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
 }
 
-void display_tokens(unsigned int token[][MAX_TOKENS][5], unsigned char document[][MAX_CHARS]){
+void display_tf(float term[][MAX_TERMS][7], unsigned char document[][MAX_CHARS]){
     printf(" %s+--------+----------+------------+------------+%s\n", T_DARK, T_END);
-    printf(" %s| doc[n] | token[n] | value      | hash[djb2] |%s\n", T_DARK, T_END);
+    printf(" %s| doc[n] | term[n]  | value      | term freq. |%s\n", T_DARK, T_END);
     printf(" %s+--------+----------+------------+------------+%s\n", T_DARK, T_END);
     for(unsigned short doc = 0; doc < MAX_DOCS; doc++){
-        for(pos = 0; pos < (page * MAX_PAGESIZE) && token[doc][pos][3] != '\0'; pos++){
-            printf(" %s| [%4d] | [%6d] | ", T_DARK, doc, token[doc][pos][0]);
-            for(unsigned short i = token[doc][pos][2]; i < (token[doc][pos][2] + token[doc][pos][3]); i++){ printf("%c", document[doc][i]); }
-            for(unsigned short i = 0; i < (11 - token[doc][pos][3]); i++){ printf(" "); } printf("|%s", T_END);
-            printf("%s %-10u |%s", T_DARK, token[doc][pos][4], T_END);
+        for(pos = 0; pos < (page * MAX_PAGESIZE) && term[doc][pos][3] != '\0'; pos++){
+            printf(" %s| [%4d] | [%6.0f] | ", T_DARK, doc, term[doc][pos][0]);
+            for(unsigned short i = term[doc][pos][2]; i < (term[doc][pos][2] + term[doc][pos][3]); i++){ printf("%c", document[doc][i]); }
+            for(unsigned short i = 0; i < (11 - term[doc][pos][3]); i++){ printf(" "); } printf("|%s", T_END);
+            printf("%s %-10.8f |%s", T_DARK, term[doc][pos][6], T_END);
             if(pos == (page * MAX_PAGESIZE) - 1){
                 printf(" press '+' & ENTER for more.. ");
                 unsigned char t;
@@ -85,15 +84,4 @@ void display_tokens(unsigned int token[][MAX_TOKENS][5], unsigned char document[
         }
     }
     printf(" %s+---------+---------+------------+------------+%s\n\n", T_DARK, T_END);
-}
-
-void display_lexic(unsigned int lexic[][MAX_WORDS][2]){
-    printf(" %s+--------+------------+--------------+--------+%s\n", T_DARK, T_END);
-    printf(" %s| doc[n] | lexic[n]   | token[hash]  | count  |%s\n", T_DARK, T_END);
-    printf(" %s+--------+------------+--------------+--------+%s\n", T_DARK, T_END);
-    for(unsigned short doc = 0; doc < MAX_DOCS; doc++)
-        for(pos = 0; pos < MAX_WORDS; pos++)
-            if(lexic[doc][pos][1] > 0)
-                printf(" %s| [%4d] | [%8d] | %-12u | %-6u |%s\n", T_DARK, doc, pos, lexic[doc][pos][0], lexic[doc][pos][1], T_END);
-    printf(" %s+--------+------------+--------------+--------+%s\n\n", T_DARK, T_END);
 }
