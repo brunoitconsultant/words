@@ -18,4 +18,5 @@ enum schema {
 
 extern float term[MAX_DOCS][MAX_TERMS][TERM_ATT];
 int extract(unsigned char content[MAX_CHARS], unsigned short doc);
+int compute_idf(float term[MAX_DOCS][MAX_TERMS][TERM_ATT]);
 #endif

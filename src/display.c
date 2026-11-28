@@ -13,7 +13,7 @@ void display_menu(){
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
     printf(" %s|  %c. Print Statistics                        |%s\n",   T_CYAN, STATS,          T_END  );
     printf(" %s|  %c. Print Documents                         |%s\n",   T_CYAN, DOCS,           T_END  );
-    printf(" %s|  %c. Print TF                                |%s\n",   T_CYAN, TF,             T_END  );
+    printf(" %s|  %c. Print TFIDF                             |%s\n",   T_CYAN, TFIDF,          T_END  );
     printf(" %s|  -------------------------------------------|%s\n",    T_CYAN,                 T_END  );
     printf(" %s|  %c  Exit                                    |%s\n",   T_CYAN, EXIT,           T_END  );
     printf(" %s+---------------------------------------------+%s\n\n",  T_CYAN,                 T_END  );
@@ -65,7 +65,7 @@ void display_stats(unsigned char documents[][MAX_CHARS]){
     printf(" %s+---------------------------------------------+%s\n\n", T_DARK, T_END);
 }
 
-void display_tf(float term[][MAX_TERMS][TERM_ATT], unsigned char document[][MAX_CHARS]){
+void display_tfidf(float term[][MAX_TERMS][TERM_ATT], unsigned char document[][MAX_CHARS]){
     printf(" %s+--------+----------+------------+------------+%s\n", T_DARK, T_END);
     printf(" %s| doc[n] | term[n]  | value      | term freq. |%s\n", T_DARK, T_END);
     printf(" %s+--------+----------+------------+------------+%s\n", T_DARK, T_END);

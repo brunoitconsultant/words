@@ -3,7 +3,6 @@
 
 float term[MAX_DOCS][MAX_TERMS][TERM_ATT] = { { { '\0' } } };
 static void tf(float term[][TERM_ATT]);
-static void idf(float term[][TERM_ATT]);
 
 int extract(unsigned char content[MAX_CHARS], unsigned short doc){
     unsigned char chr, prev = '\0';
@@ -28,7 +27,6 @@ int extract(unsigned char content[MAX_CHARS], unsigned short doc){
     }
     term[doc][seq][TERM_LENGTH] = '\0';
     tf(term[doc]);
-    idf(term[doc]);
     return 0;
 }
 
@@ -42,7 +40,7 @@ static void tf(float term[][TERM_ATT]){
     }
 }
 
-static void idf(float term[][TERM_ATT]){
+int compute_idf(float term[MAX_DOCS][MAX_TERMS][TERM_ATT]){
     /*unsigned int max = 0;
     for(unsigned int t = 0; t < (MAX_TERMS - 1) && term[t][TERM_LENGTH] != '\0'; t++) max++;
     for(unsigned int t = 0; t < max; t++){
